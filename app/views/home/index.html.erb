@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
+      
+    </head>
+    <body >
+
+        <% if current_user %>
+            <% if admin_can_sign_up? %>
+                <div class="container">
+                    <div class="dashboard">
+                        <h1>Dashboard</h1>
+                        <p><%= Date.today.strftime("%d-%m-%Y") %></p>
+                    </div>
+                    <div class="search">
+                    </div>
+                    <div class="pfp_image">
+                        <%= image_tag("pfp.webp",class:"image")%>
+                    </div>
+                    <div class="name">
+                            <span><%= current_user.admin.name %></span>
+                    </div>
+                </div>
+                <div class="container_grid text-center">
+                    <div class="row">
+                        <div class="col">
+                            <h4>Deactive Owners</h4>
+                            <br />
+                            <% deactive_count = 0 %>
+                            <% active_count = 0 %>
+                            <% current_user.admin.owners.each do |owner| %>
+                                <% if owner.status == "deactive" %>
+                                    <% deactive_count += 1 %>
+                                <%else%>
+                                    <% active_count += 1 %>
+                                <% end %>
+                            <% end %>
+                            <h6><%= deactive_count %></h6>
+                            <%= button_to 'Activate'%>
+                        </div>
+                        <div class="col">
+                            <h4>Active PG Owners</h4>
+                            <br />
+                            <h6><%= active_count %></h6>
+                            <%= button_to 'De-Activate'%>
+                        </div>
+                        <div class="col">
+                            <h4>Total PG Owners</h4>
+                            <br />
+                            <h6>The PG Owners created by you:<br /><br /><%= current_user.admin.owners.count%></h6>
+                        </div>
+                        <div class="col">
+                            <h4>Total PG's</h4>
+                        </div>
+                    </div>
+                </div>
+            <%else%>
+                <h1>you are a <%= current_user.role %></h1>
+                <% if current_user.customer.present? %>
+                    <h1> your name is <%= current_user.customer.name %></h1>
+                <% end %>
+                <%= button_to 'LogOut', destroy_user_session_path, method: :delete %>
+            <%end%>
+
+        <% end %>
+    </body>
+</html>

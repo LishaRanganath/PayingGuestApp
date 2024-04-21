@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg" style="height:80px;background-color:#ffcccc">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="logo">
+        <a class="nav-link active" aria-current="page" href="#"><%= image_tag("airbnb.webp", width:"50px") %></a>
+    </div>
+    <div class="link_actions">
+        <ul class="navbar-nav">
+            <%if current_user && current_user.role == "admin"%>
+                <li class="nav-item">
+                    <%=link_to 'Add Owners',new_owner_path, class: "nav-link", style:"font-size: 20px"%>
+                </li>
+            <%else%>
+                <li class="nav-item">
+                <%=link_to 'SignUp',new_user_registration_path, class: "nav-link", style:"font-size: 20px"%>
+            </li>
+            <li class="nav-item">       
+                <%=button_to 'SignIn',new_user_session_path, class: "nav-link", style:"font-size: 20px"%>
+            </li>
+            <%end%>
+            <li class="nav-item">       
+                <%=button_to 'SignOut', destroy_user_session_path	, class: "nav-link",method: :delete, style:"font-size: 20px"%>
+            </li> 
+    </div>
+    </div>
+</nav>
