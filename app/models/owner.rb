@@ -4,6 +4,8 @@ class Owner < ApplicationRecord
 
   belongs_to :admin
 
+  has_many :pg_buildings
+
   after_initialize :set_default_status, :if => :new_record?
   def set_default_status
     self.status||="deactive"

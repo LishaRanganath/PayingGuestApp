@@ -2,12 +2,12 @@
 
 <h2 style="display:flex; justify-content:center;margin-top: 30px">Sign up</h2>
 <div class="register_container">
-  <%= nested_form_for([resource_name, resource.with_customer], as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for([resource_name, resource.with_customer], as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
   <%= f.fields_for :customer, @user.customer || @user.build_customer do |customer_fields| %>
       <div class="field">
-        <%= customer_fields.label :name %><br>
+      <%= customer_fields.label :name %><br>
         <%= customer_fields.text_field :name, style: "width:500px;" %>
       </div>
       <div class="field">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation %><br />
+      <%= f.label  :password_confirmation %><br />
       <%= f.password_field :password_confirmation, autocomplete: "new-password", style: "width:500px;" %>
     </div>
 

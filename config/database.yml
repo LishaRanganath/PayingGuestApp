@@ -14,19 +14,19 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: xoxo123
-  socket: /var/run/mysqld/mysqld.sock
+  password: lisha123
+  socket: /tmp/mysql.sock
 
 development:
   <<: *default
-  database: paying_guest_development
+  database: paying_guest_app_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: paying_guest_test
+  database: paying_guest_app_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -34,7 +34,7 @@ test:
 #
 # Instead, provide the password or a full connection URL as an environment
 # variable when you boot the app. For example:
-#
+#pown
 #   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"
 #
 # If the connection URL is provided in the special DATABASE_URL environment
@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: paying_guest_production
-  username: paying_guest
+  database: paying_guest_app_production
+  username: paying_guest_app
   password: <%= ENV["PAYING_GUEST_DATABASE_PASSWORD"] %>

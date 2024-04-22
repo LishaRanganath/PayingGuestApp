@@ -1,5 +1,8 @@
 class OwnerController < ApplicationController
   # before_action :check_if_admin
+  def index
+    @owner_all = Owner.all
+  end
   def new
     @owner = Owner.new
     @owner.build_user
@@ -14,6 +17,26 @@ class OwnerController < ApplicationController
     else
       flash.now[:alert] = @owner.errors.full_messages.join(", ")
       render :new
+    end
+  end
+
+  def activate
+    @owner_activate = Owner.find_by(id: params[:id])
+    @owner_activate.update(status: "active")
+    if @owner_activate.save
+      redirect_to owner_index_path , notice: "Status sucessfully updated"
+    else
+      redirect_to owner_index_path , notice: "Status was not updated"
+    end
+  end
+
+  def deactivate
+    @owner_deactivate = Owner.find_by(id: params[:id])
+    @owner_deactivate.update(status: @owner_deactivate.status="deactive")
+    if @owner_deactivate.save
+      redirect_to owner_index_path , notice: "Status sucessfully updated"
+    else
+      redirect_to owner_index_path , alert: "Status was not updated"
     end
   end
 

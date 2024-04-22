@@ -36,24 +36,28 @@
                                 <% end %>
                             <% end %>
                             <h6><%= deactive_count %></h6>
-                            <%= button_to 'Activate'%>
+
+                            <%= link_to 'Activate',owner_index_path%>
                         </div>
                         <div class="col">
                             <h4>Active PG Owners</h4>
                             <br />
                             <h6><%= active_count %></h6>
-                            <%= button_to 'De-Activate'%>
+
+                            <%= link_to 'De-Activate',owner_index_path%>
                         </div>
                         <div class="col">
                             <h4>Total PG Owners</h4>
                             <br />
                             <h6>The PG Owners created by you:<br /><br /><%= current_user.admin.owners.count%></h6>
+                            <%= link_to 'View All',owner_index_path%>
                         </div>
                         <div class="col">
                             <h4>Total PG's</h4>
                         </div>
                     </div>
                 </div>
+                
             <%else%>
                 <h1>you are a <%= current_user.role %></h1>
                 <% if current_user.customer.present? %>

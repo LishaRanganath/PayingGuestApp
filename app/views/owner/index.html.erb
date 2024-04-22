@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <%= stylesheet_link_tag 'owner', media: 'all', 'data-turbolinks-track': 'reload' %>
+    </head>
+    <body>
+        <div class="cont">
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th colspan="3" style="text-align:center;">Action</th>
+                </tr>
+                <% @owner_all.each do |owner| %>
+                    <tr>
+                        <td><%= owner.name%></td>
+                        <td><%= owner.phone%></td>
+                        <td><%= owner.status%></td>
+                        <%if owner.status=="deactive"%>
+                            <td><%= link_to 'Activate',activate_owner_path(owner)%></td>
+                            <td><%= link_to 'Deactivate',:html => {:disabled => true} %></td>
+                        <%else%>
+                            <td><%= link_to 'Activate',:html => {:disabled => true} %></td>
+                            <td><%= link_to 'Deactivate',deactivate_owner_path(owner)%></td>
+                        <%end%>
+                        <td><%= link_to 'View PGs',pg_building_index_path(id: owner.id)%>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
+    </body>
+</html>
