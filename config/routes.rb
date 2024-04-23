@@ -9,8 +9,8 @@ Rails.application.routes.draw do
       get 'deactivate'
     end
   end
-  # resources :pg_building
-  get "pg_building/:id",to:"pg_building#index"
+  resources :pg_building
+  # get "pg_building/:id",to:"pg_building#index"
   # get "/owner/pg", to:"pg_building#index"
   # get 'owner'
   # post 'owner', to:'owner#create'

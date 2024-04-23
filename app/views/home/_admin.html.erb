@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="dashboard">
+        <h1>Dashboard</h1>
+        <p><%= Date.today.strftime("%d-%m-%Y") %></p>
+    </div>
+    <div class="search">
+    </div>
+    <div class="pfp_image">
+        <%= image_tag("pfp.webp",class:"image")%>
+    </div>
+    <div class="name">
+            <span><%= current_user.admin.name %></span>
+    </div>
+</div>
+<div class="container_grid text-center">
+    <div class="row">
+        <div class="col">
+            <h4>Deactive Owners</h4>
+            <br />
+            <% deactive_count = 0 %>
+            <% active_count = 0 %>
+            <% current_user.admin.owners.each do |owner| %>
+                <% if owner.status == "deactive" %>
+                    <% deactive_count += 1 %>
+                <%else%>
+                    <% active_count += 1 %>
+                <% end %>
+            <% end %>
+            <h6><%= deactive_count %></h6>
+
+            <%= link_to 'Activate',owner_index_path%>
+        </div>
+        <div class="col">
+            <h4>Active PG Owners</h4>
+            <br />
+            <h6><%= active_count %></h6>
+
+            <%= link_to 'De-Activate',owner_index_path%>
+        </div>
+        <div class="col">
+            <h4>Total PG Owners</h4>
+            <br />
+            <h6>The PG Owners created by you:<br /><br /><%= current_user.admin.owners.count%></h6>
+            <%= link_to 'View All',owner_index_path%>
+        </div>
+        <div class="col">
+            <h4>Total PG's</h4>
+            <br />
+            <h6>The total number of PGs are:</h6>
+            <%count = 0%>
+            <% current_user.admin.owners.each do |owner| %>
+                <% if owner.status=="active" %>
+                    <%owner.pg_buildings.each do |building|%>
+                        <%count=count+1%>
+                    <%end%>
+                <%end%>
+            <%end%>
+            <br />
+            <%= count %>
+            <br />
+            <%= link_to 'View All'%>
+        </div>
+    </div>
+</div>

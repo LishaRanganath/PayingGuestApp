@@ -1,0 +1,45 @@
+<html>
+    <head>
+                <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    </head>
+    <body>
+        <%= render partial: "modal"%>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <button type="button" id="myInput" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Building</button>
+
+                </div>
+                <div class="col">
+                    <%= button_to 'Modify Buildings'%>
+                </div>
+            </div>
+        </div>
+        <div class="grid-container">
+            <%@pg_buildings.each do |building|%>
+                <%if (building.owner_id == current_user.owner.id) && current_user.owner.status == "active"%>
+                            <div class="item", id="building">
+                                <% if building.image.present? %>
+                                    <%= image_tag building.image, style: "height:120px;width:120px;" %>
+                                <% else %>
+                                    <p>No image available</p>
+                                <% end %>
+                                <p><%=building.name%></p>
+                                <p><%=building.phone%></p>
+                                <p><%=building.email%></p>
+                                <p><%=building.address%></p>
+                            </div>
+                <%end%>
+            <%end%>
+        </div>
+    </body>
+    <script>
+      const myModal = document.getElementById('myModal');
+      const myInput = document.getElementById('myInput');
+
+      myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus();
+      });
+</script>
+</html>

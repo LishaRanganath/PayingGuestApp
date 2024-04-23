@@ -8,6 +8,7 @@ class OwnerController < ApplicationController
     @owner.build_user
   end
 
+
   def create
     @owner = Owner.new(owner_params)
     @owner.admin_id = current_user.admin.id

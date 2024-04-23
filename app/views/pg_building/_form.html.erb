@@ -1,0 +1,29 @@
+<%= form_with(model: @pg_building, url: pg_building_path(current_user.owner.id), method: :post) do |form| %>
+    <div class="field">
+    <%= form.label :name, "Name:" %><br>
+    <%= form.text_field :name %>
+    </div>
+
+    <div class="field">
+    <%= form.label :phone, "Phone Number:" %><br>
+    <%= form.text_field :phone %>
+    </div>
+
+    <div class="field">
+    <%= form.label :address, "Location:" %><br>
+    <%= form.text_field :address %>
+    </div>
+    <div class="field">
+    <%= form.label :email, "Email:" %><br>
+    <%= form.text_field :email %>
+    </div>
+
+    <div class="field">
+        <%= form.label :image,"Image:" %>&nbsp &nbsp &nbsp
+        <%= form.file_field :image %>
+    </div>
+
+
+    <%= form.submit "Add Building" %>
+<% end %>
+
