@@ -54,6 +54,20 @@
                         </div>
                         <div class="col">
                             <h4>Total PG's</h4>
+                            <br />
+                            <h6>The total number of PGs are:</h6>
+                            <%count = 0%>
+                            <% current_user.admin.owners.each do |owner| %>
+                                <% if owner.status=="active" %>
+                                    <%owner.pg_buildings.each do |building|%>
+                                        <%count=count+1%>
+                                    <%end%>
+                                <%end%>
+                            <%end%>
+                            <br />
+                            <%= count %>
+                            <br />
+                            <%= link_to 'View All'%>
                         </div>
                     </div>
                 </div>
