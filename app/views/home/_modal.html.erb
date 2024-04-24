@@ -2,12 +2,16 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <% if current_user.role == "owner"%>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Building</h1>
+                <%else%>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Owner</h1>
+                <%end%>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body"> 
                 <% if current_user.role == "owner"%>
-                    <%= render partial:"pg_building/new"%>
+                    <%= render partial:"pg_buildings/new"%>
                 <%else%>
                     <%= render partial:"owners/new",locals: { owner: Owner.new }%>
                 <%end%>

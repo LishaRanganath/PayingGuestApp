@@ -18,8 +18,10 @@
                     <span><%= current_user.admin.name %></span>
             </div>
         </div>
-        <button type="button" id="myInput1" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Owner</button>
-
+        <div class="action_buttons">
+            <button type="button" id="add_owner_input" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Owner</button>
+            <button type="button" id="myInput1" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Owner</button>
+        </div>
         <div class="container_grid text-center">
             <div class="row">
                 <div class="col">
@@ -62,14 +64,34 @@
                 </div>
             </div>
         </div>
+        <div class="grid-container">
+            <%@pg_buildings.each do |building|%>
+                <%if (building.owner.admin_id == current_user.admin.id)%>
+                        <div class="item", id="building">
+                            <% if building.image.present? %>
+                                <%= image_tag building.image, style: "height:120px;width:120px;" %>
+                            <% else %>
+                                <p>No image available</p>
+                            <% end %>
+                            <p><%=building.name%></p>
+                            <p><%=building.phone%></p>
+                            <p><%=building.email%></p>
+                            <p><%=building.address%></p>
+                            <p><%= building.owner.name%>
+                        </div>
+                <%end%>
+            <%end%>
+        </div>
     </body>
     <script>
-      const myInput1 = document.getElementById('myInput');
-      const myModal = document.getElementById('myModal');
-      
+        $('#add_owner_input').on('click', function(){
+            const AddOwnerInput = document.getElementById('add_owner_input');
+            const myModal = document.getElementById('myModal');
+            
 
-      myModal.addEventListener('shown.bs.modal', () => {
-        myInput.focus();
+            myModal.addEventListener('shown.bs.modal', () => {
+                AddOwnerInput.focus();
+            });
       });
     </script>
 </html>

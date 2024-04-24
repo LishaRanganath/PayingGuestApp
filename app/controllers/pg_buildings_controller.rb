@@ -3,8 +3,11 @@ class PgBuildingsController < ApplicationController
 
   # To display all the PGs that are owned by the Owner
   def show
-    @owner=Owner.find_by(id: current_user.owner.id)
-    @pg_buildings=@owner.pg_buildings
+    if current_user && current_user.owner?
+      owner=Owner.find_by(id: current_user.owner.id)
+      @pg_buildings=owner.pg_buildings
+    end
+    @pg_building=PgBuilding.find_by(id: params[:id])
   end
 
   #To create a new instance of PgBuilding

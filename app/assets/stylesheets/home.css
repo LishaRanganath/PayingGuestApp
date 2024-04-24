@@ -89,13 +89,6 @@ body {
   margin-left: 25%;
   margin-top: 10%;
   padding-left: 20%;
-  /* justify-content: space-between; */
-  /* height: 100%;
-  
-  
-  
-  
-  align-items: center; */
 }
 #building {
   border: 2px solid black;
@@ -113,4 +106,27 @@ body {
   padding: 20px;
   font-size: 20px;
   text-align: center;
+}
+.grid-container .image_container {
+  width: 100%;
+  height: 50%;
+}
+.grid-container .image {
+  height: 100%;
+  width: 80%;
+}
+.action_buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 4%;
+}
+.action_buttons .btn {
+  background-color: #ffffff0e;
+  border: 2px solid black;
+  margin-right: 5%;
+  width: 500px;
+  height: 50px;
+}
+.action_buttons .btn:hover {
+  background-color: #12111142;
 }

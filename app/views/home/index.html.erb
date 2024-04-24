@@ -4,7 +4,6 @@
       
     </head>
     <body >
-
         <% if current_user %>
             <% if admin_log_in? %>
                 <%= render partial: "admin"%>
@@ -13,21 +12,31 @@
                 <%= render partial: "owner"%>
 
             <%else%>
-                <h1>you are a <%= current_user.role %></h1>
-                <% if current_user.customer.present? %>
-                    <h1> your name is <%= current_user.customer.name %></h1>
-                <% end %>
-                <%= button_to 'LogOut', destroy_user_session_path, method: :delete %>
+                <%= render partial: "customer"%>
             <%end%>
+        <%else%>
+            <div class="grid-container">
+            <%@pg_buildings.each do |building|%>
+                        <%=link_to pg_building_path(building.id) do%>
+                            <div class="item", id="building">
+                                <div class="image_container">
+                                    <% if building.image.present? %>
+                                        <%= image_tag url_for(building.image), class: "image" %>
+                                    <% else %>
+                                        <p>No image available</p>
+                                    <% end %>
+                                </div>
+                                <div class="details">
+                                    <p><%=building.name%></p>
+                                    <p><%=building.phone%></p>
+                                    <p><%=building.email%></p>
+                                    <p><%=building.address%></p>
+                                </div>
+                            </div>
+                        <%end%>
+            <%end%>
+            </div>
 
         <% end %>
     </body>
-    <%# <script>
-            const myModal = document.getElementById('myModal');
-            const myInput = document.getElementById('myInput');
-
-            myModal.addEventListener('shown.bs.modal', () => {
-                myInput.focus();
-            });
-        </script> %>
 </html>
