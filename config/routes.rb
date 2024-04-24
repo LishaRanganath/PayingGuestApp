@@ -3,13 +3,14 @@ Rails.application.routes.draw do
   get 'owner/new'
   root'home#index'
   devise_for :users
-  resources :owner do
+  resources :owners do
     member do
       get 'activate'
       get 'deactivate'
     end
   end
-  resources :pg_building
+  resources :pg_buildings, only: [:show, :create]
+
   # get "pg_building/:id",to:"pg_building#index"
   # get "/owner/pg", to:"pg_building#index"
   # get 'owner'

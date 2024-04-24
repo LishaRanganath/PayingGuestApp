@@ -6,7 +6,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body"> 
-                <%= render partial:"pg_building/new"%>
+                <% if current_user.role == "owner"%>
+                    <%= render partial:"pg_building/new"%>
+                <%else%>
+                    <%= render partial:"owners/new",locals: { owner: Owner.new }%>
+                <%end%>
             </div>
         </div>
     </div>

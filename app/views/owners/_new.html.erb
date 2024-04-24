@@ -1,0 +1,29 @@
+<html>
+  <head></head>
+  <body>
+      <%= form_with(model: owner,url: owners_path, method: :post,html: { id: "new_owner_form" }) do |form| %>
+        <div class="field">
+          <%= form.label :name, "Owner Name" %><br>
+          <%= form.text_field :name %>
+        </div>
+        <div class="field">
+          <%= form.label :phone, "Phone Number" %><br>
+          <%= form.text_field :phone %>
+        </div>
+
+        <%= form.fields_for :user_attributes do |user_fields| %>
+          <div class="field">
+            <%= user_fields.label :email, "Email Address" %><br>
+            <%= user_fields.email_field :email %>
+          </div>
+          <div class="field">
+            <%= user_fields.label :password, "Password" %><br>
+            <%= user_fields.password_field :password %>
+          </div>
+        <% end %>
+
+        <%= form.submit "Add Owner" %>
+      <% end %>
+        </div>
+  </body>
+</html>

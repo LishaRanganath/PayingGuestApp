@@ -1,4 +1,4 @@
-class OwnerController < ApplicationController
+class OwnersController < ApplicationController
   # before_action :check_if_admin
   def index
     @owner_all = Owner.all
@@ -25,9 +25,9 @@ class OwnerController < ApplicationController
     @owner_activate = Owner.find_by(id: params[:id])
     @owner_activate.update(status: "active")
     if @owner_activate.save
-      redirect_to owner_index_path , notice: "Status sucessfully updated"
+      redirect_to owners_path , notice: "Status sucessfully updated"
     else
-      redirect_to owner_index_path , notice: "Status was not updated"
+      redirect_to owners_path , notice: "Status was not updated"
     end
   end
 
@@ -35,9 +35,9 @@ class OwnerController < ApplicationController
     @owner_deactivate = Owner.find_by(id: params[:id])
     @owner_deactivate.update(status: @owner_deactivate.status="deactive")
     if @owner_deactivate.save
-      redirect_to owner_index_path , notice: "Status sucessfully updated"
+      redirect_to owners_path , notice: "Status sucessfully updated"
     else
-      redirect_to owner_index_path , alert: "Status was not updated"
+      redirect_to owners_path , alert: "Status was not updated"
     end
   end
 

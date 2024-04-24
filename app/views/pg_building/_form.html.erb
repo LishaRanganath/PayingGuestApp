@@ -1,4 +1,4 @@
-<%= form_with(model: @pg_building, url: pg_building_path(current_user.owner.id), method: :post) do |form| %>
+<%= form_with(model: pg_building, url: pg_buildings_path , method: :post) do |form| %>
     <div class="field">
     <%= form.label :name, "Name:" %><br>
     <%= form.text_field :name %>

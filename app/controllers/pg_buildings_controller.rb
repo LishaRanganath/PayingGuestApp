@@ -1,9 +1,9 @@
 # To handle all the actions of the PG Buildings
-class PgBuildingController < ApplicationController
+class PgBuildingsController < ApplicationController
 
   # To display all the PGs that are owned by the Owner
   def show
-    @owner=Owner.find_by(id: params[:id])
+    @owner=Owner.find_by(id: current_user.owner.id)
     @pg_buildings=@owner.pg_buildings
   end
 
@@ -14,8 +14,8 @@ class PgBuildingController < ApplicationController
 
   #To create the new PG Building
   def create
-    @owner_id = params[:id] 
-    new_building = @owner.pg_buildings.create(building_params)
+    @current_owner = current_user.owner
+    new_building = @current_owner.pg_buildings.create(building_params)
     if new_building.save
       redirect_to root_path, notice: "Building added sucessfully"
     else
