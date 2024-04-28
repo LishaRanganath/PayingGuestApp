@@ -61,6 +61,20 @@ body {
   margin: 0 10px;
   opacity: 0.9;
 }
+.container_grid .row .col .btn{
+  border: 2px solid black;
+  width: 300px;
+  
+}
+.container_grid .row .col .btn .links{
+  text-decoration: none;
+  color: black;
+  padding-left: 20%;
+}
+.container_grid .row .col .btn:hover{
+  background-color: #12111142;
+
+}
 .register_container {
   height: 100%;
   width: 30%;
@@ -95,37 +109,78 @@ body {
   border-radius: 7px;
 }
 .grid-container {
+  height: 50%;
   margin-top: 3%;
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(4, 1fr);
   padding: 10px;
   column-gap: 50px;
   row-gap: 50px;
+ 
 }
 .grid-container .item {
   padding: 20px;
   font-size: 20px;
   text-align: center;
-}
-.grid-container .image_container {
-  width: 100%;
-  height: 50%;
+  background-color: rgba(234, 234, 235, 0.3);
 }
 .grid-container .image {
-  height: 100%;
-  width: 80%;
+    height: 250px;
+    width: 300px;
+
 }
+.grid-container .no_image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20%;
+  height: 230px;
+  width: 300px;
+  color: red;
+}
+.grid-container a{
+  text-decoration: none;
+}
+.grid-container .content{
+  margin-top: 10%;
+  display: flex;
+  /* justify-content: space-between; */
+}
+.grid-container .content .details{
+  text-align: left;
+  color: black;
+  width: 50%;
+}
+.grid-container .content .actions{
+  text-align: right;
+  width: 50%;
+  /* float: inline-end; */
+}
+.grid-container .content .actions .btn{
+  width: 100px;
+  height: 50px;
+}
+
 .action_buttons {
   display: flex;
   justify-content: center;
   margin-top: 4%;
 }
 .action_buttons .btn {
+  color: black;
   background-color: #ffffff0e;
   border: 2px solid black;
   margin-right: 5%;
   width: 500px;
   height: 50px;
+  font-size: 20px;
+  
+}
+.action_buttons .btn .links{
+  text-decoration: none;
+  font-size: 20px;
+  padding-left: 25%;
+  color: black;
 }
 .action_buttons .btn:hover {
   background-color: #12111142;

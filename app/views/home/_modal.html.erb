@@ -13,7 +13,7 @@
                 <% if current_user.role == "owner"%>
                     <%= render partial:"pg_buildings/new"%>
                 <%else%>
-                    <%= render partial:"owners/new",locals: { owner: Owner.new }%>
+                    <%= render partial:"owners/form",locals: { owner: Owner.new, path: owners_path, method: :post }%>
                 <%end%>
             </div>
         </div>

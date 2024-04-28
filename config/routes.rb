@@ -9,7 +9,11 @@ Rails.application.routes.draw do
       get 'deactivate'
     end
   end
-  resources :pg_buildings, only: [:show, :create]
+  resources :pg_buildings do
+    member do
+      get 'list'
+    end
+  end
 
   # get "pg_building/:id",to:"pg_building#index"
   # get "/owner/pg", to:"pg_building#index"

@@ -9,7 +9,7 @@
                     <th>Name</th>
                     <th>Phone</th>
                     <th>Status</th>
-                    <th colspan="4" style="text-align:center;">Action</th>
+                    <th colspan="5" style="text-align:center;">Action</th>
                 </tr>
                 <% @owner_all.each do |owner| %>
                     <tr>
@@ -17,17 +17,32 @@
                         <td><%= owner.phone%></td>
                         <td><%= owner.status%></td>
                         <%if owner.status=="deactive"%>
-                            <td><button><%= link_to 'Activate',activate_owner_path(owner)%></button></td>
-                            <td><button><%= link_to 'Deactivate',:html => {:disabled => true} %></button></td>
+                            <td><button type="button" class="btn"><%= link_to 'Activate',activate_owner_path(owner),class: 'links'%></button></td>
+                            <td><button type="button" class="btn disabled"><%= link_to 'Deactivate ','#',class: 'links',:html => {:disabled => true} %></button></td>     
                         <%else%>
-                            <td><button><%= link_to 'Activate',:html => {:disabled => true} %></button></td>
-                            <td><button><%= link_to 'Deactivate',deactivate_owner_path(owner)%></button></td>
+                            <td><button type="button" class="btn disabled"><%= link_to 'Activate','#',class: 'links',:html => {:disabled => true} %></button></td>     
+                            <td><button type="button" class="btn"><%= link_to 'Deactivate',deactivate_owner_path(owner),class: 'links'%></button></td>
                         <%end%>
-                        <td><%= link_to 'View PGs',pg_building_index_path(id: owner.id)%>
-                        <td><%= link_to 'Edit'%>
+                        <td><button type="button" class="btn"><%= link_to 'View PGs', list_pg_building_path(owner.id),class: 'links'%></button></td>
+                        <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editModal_<%= owner.id %>">Edit Owner</button></td>
+                        <td><%= button_to 'Delete', owner_path(owner.id), method: :delete, data: { confirm: 'Are you sure?' },class:"btn" %></td>
+                        
+      <%= render partial: "modal", locals: { owner: owner } %>
                     </tr>
+                    
                 <% end %>
             </table>
         </div>
     </body>
+    <script>
+        $('#edit_owner').on('click', function(){
+            const EditOwnerInput = document.getElementById('edit_owner');
+            const myModal = document.getElementById('editModal');
+            
+
+            myModal.addEventListener('shown.bs.modal', () => {
+                EditOwnerInput.focus();
+            });
+      });
+    </script>
 </html>

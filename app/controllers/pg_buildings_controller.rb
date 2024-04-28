@@ -1,5 +1,9 @@
 # To handle all the actions of the PG Buildings
 class PgBuildingsController < ApplicationController
+  def list
+    owner=Owner.find_by(id: params[:id])
+    @owner_buildings=owner.pg_buildings
+  end
 
   # To display all the PGs that are owned by the Owner
   def show
@@ -23,6 +27,17 @@ class PgBuildingsController < ApplicationController
       redirect_to root_path, notice: "Building added sucessfully"
     else
       render :new, notice: "Building could not be added "
+    end
+  end
+
+  #To destroy the PG Building
+  def destroy
+    puts("=========================================================")
+    building=PgBuilding.find_by(id: params[:id])
+    if building.destroy
+      redirect_to root_path, notice: "Building deleted"
+    else
+      redirect_to root_path, notice: "Building cannot be deleted"
     end
   end
 

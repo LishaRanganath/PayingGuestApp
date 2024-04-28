@@ -15,7 +15,7 @@
                 <%= render partial: "customer"%>
             <%end%>
         <%else%>
-            <div class="grid-container">
+            <div class="grid-container", style="width=40%;">
             <%@pg_buildings.each do |building|%>
                         <%=link_to pg_building_path(building.id) do%>
                             <div class="item", id="building">
@@ -23,12 +23,12 @@
                                     <% if building.image.present? %>
                                         <%= image_tag url_for(building.image), class: "image" %>
                                     <% else %>
-                                        <p>No image available</p>
+                                        <p class="no_image">No image available</p>
                                     <% end %>
                                 </div>
                                 <div class="details">
                                     <p><%=building.name%></p>
-                                    <p><%=building.phone%></p>
+                                    <p>phone: <%=building.phone%></p>
                                     <p><%=building.email%></p>
                                     <p><%=building.address%></p>
                                 </div>

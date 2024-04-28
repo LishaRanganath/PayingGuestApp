@@ -1,0 +1,18 @@
+<!-- Modal Partial (_modal.html.erb) -->
+<div class="modal fade" id="editModal_<%= owner.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <% if current_user.role == "owner" %>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Building</h1>
+        <% else %>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Owner</h1>
+        <% end %>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body"> 
+        <%= render partial: "owners/form", locals: { owner: owner, path: owner_path(owner), method: :put } %>
+      </div>
+    </div>
+  </div> 
+</div>

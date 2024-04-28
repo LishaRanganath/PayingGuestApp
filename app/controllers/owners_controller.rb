@@ -17,7 +17,28 @@ class OwnersController < ApplicationController
       redirect_to root_path, notice: "Owner and user successfully created."
     else
       flash.now[:alert] = @owner.errors.full_messages.join(", ")
-      render :new
+    end
+  end
+
+  def edit
+    @owner=Owner.find_by(id: params[:id])
+  end
+
+  def update
+    @owner = Owner.find(params[:id])
+    if @owner.update(owner_params)
+      puts"=================================="
+      flash[:success] = "Owner updated successfully"
+      redirect_to owners_path
+    end
+  end
+
+  def destroy
+    owner = Owner.find_by(id: params[:id])
+    if owner.destroy
+      redirect_to root_path, notice: "Owner deleted sucessfully"
+    else
+      redirect_to root_path, alert: "Owner was not deleted"
     end
   end
 
