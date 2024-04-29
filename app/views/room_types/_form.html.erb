@@ -1,0 +1,18 @@
+<html>
+  <head></head>
+  <body>
+      <%= form_with(model: RoomType.new,url: room_types_path, method: :post) do |form| %>
+        <div class="field">
+          <%= form.label :name, "Room Type" %><br>
+          <%= form.text_field :name %>
+        </div>
+        <div class="field">
+          <%= form.label :price, "Cost per Day" %><br>
+          <%= form.text_field :price %>
+        </div>
+
+        <%= form.submit "Submit" %>
+      <% end %>
+        </div>
+  </body>
+</html>

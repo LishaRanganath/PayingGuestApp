@@ -1,0 +1,18 @@
+<html>
+  <head></head>
+  <body>
+      <%= form_with(model: Category.new, url: categories_path, method: :post) do |form| %>
+        <div class="field">
+          <%= form.label :name, "Room Category" %><br>
+          <%= form.text_field :name %>
+        </div>
+        <div class="field">
+          <%= form.label :price, "Cost" %><br>
+          <%= form.text_field :price %>
+        </div>
+
+        <%= form.submit "Submit" %>
+      <% end %>
+        </div>
+  </body>
+</html>

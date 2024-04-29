@@ -65,22 +65,30 @@
                 </div>
             </div>
         </div>
-        <div class="grid-container">
+        <div class="grid-container", style="width: 100%">
             <%@pg_buildings.each do |building|%>
-                <%if (building.owner.admin_id == current_user.admin.id)%>
-                        <div class="item", id="building">
-                            <% if building.image.present? %>
-                                <%= image_tag building.image, style: "height:120px;width:120px;" %>
-                            <% else %>
-                                <p>No image available</p>
-                            <% end %>
-                            <p><%=building.name%></p>
-                            <p><%=building.phone%></p>
-                            <p><%=building.email%></p>
-                            <p><%=building.address%></p>
-                            <p><%= building.owner.name%>
-                        </div>
-                <%end%>
+                        <%if building.owner.status == "active"%>
+                            <div class="item", id="building">
+                                 <%=link_to pg_building_path(building.id), method: :get do%>
+                                
+                                    <div class="image_container">
+                                        <% if building.image.present? %>
+                                            <%= image_tag url_for(building.image), class: "image" %>
+                                        <% else %>
+                                            <p class="no_image", style="padding-left:20%;">No image available</p>
+                                        <% end %>
+                                    </div>
+                                <%end%>
+                                    <div class="content">
+                                        <div class="details">
+                                            <p><%=building.name%></p>
+                                            <p>phone: <%=building.phone%></p>
+                                            <p><%=building.email%></p>
+                                            <p><%=building.address%></p>
+                                        </div>
+                                    </div>
+                            </div>
+                        <%end%>
             <%end%>
         </div>
     </body>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_23_094552) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_29_102332) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,6 +47,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_23_094552) do
     t.index ["user_id"], name: "index_admins_on_user_id"
   end
 
+  create_table "available_rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "room_type_id", null: false
+    t.bigint "category_id", null: false
+    t.integer "room_price"
+    t.integer "availability"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_available_rooms_on_category_id"
+    t.index ["room_type_id"], name: "index_available_rooms_on_room_type_id"
+  end
+
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "pg_building_id", null: false
+    t.index ["pg_building_id"], name: "index_categories_on_pg_building_id"
+  end
+
   create_table "customers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "phone"
@@ -80,6 +100,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_23_094552) do
     t.index ["owner_id"], name: "index_pg_buildings_on_owner_id"
   end
 
+  create_table "room_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "pg_building_id", null: false
+    t.index ["pg_building_id"], name: "index_room_types_on_pg_building_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -98,9 +127,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_23_094552) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admins", "users"
+  add_foreign_key "available_rooms", "categories"
+  add_foreign_key "available_rooms", "room_types"
+  add_foreign_key "categories", "pg_buildings"
   add_foreign_key "customers", "users"
   add_foreign_key "owners", "admins"
   add_foreign_key "owners", "users"
   add_foreign_key "pg_buildings", "owners"
+  add_foreign_key "room_types", "pg_buildings"
   add_foreign_key "users", "customers"
 end

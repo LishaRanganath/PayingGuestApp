@@ -1,0 +1,116 @@
+<% if current_user && current_user.owner?%>
+       <%= render partial: "room_modal"%>
+       <%= render partial: "category_modal"%>
+     <div class="main_container">
+         <div class="action_buttons",style="margin-left: 30%;">
+            <button type="button" id="add_room_type" class="btn" data-bs-toggle="modal" data-bs-target="#roomModal">Add Room Type</button>
+            <button type="button" id="add_category" class="btn" data-bs-toggle="modal" data-bs-target="#categoryModal">Add Room Category</button>
+
+        </div>
+        <br />
+        <br />
+        <h1><%= pg_building.name%></h1>
+        <div class="image-container">
+            <% if pg_building.image.present? %>
+                <%= image_tag url_for(pg_building.image), class: "image" %>
+            <% else %>
+                <p class="no_image", style="padding-left:20%;">No image available</p>
+            <% end %>
+        </div>
+        <br />
+
+        <br />
+        <p>Location:&nbsp &nbsp<%= pg_building.address%></p>
+        <br />
+        <u><h4>Rooms Available</h4></u>
+        <div class="room_data">
+            <table class="table table-striped" id="room_type_table">
+                <tr>
+                    <th>Room Type</th>
+                    <th>Price</th>
+                    <th colspan="2" style="text-align:center;">Action</th>
+                </tr>    
+                <% pg_building.room_types.each do |room|%>
+                    <tr>
+                        <td><%= room.name%></td>
+                        <td><%= room.price%></td>
+                        <td><button type="button" class="btn"><%= link_to 'Update',class: 'links'%></button></td>
+                        <td><button type="button" class="btn"><%= link_to 'Delete',class: 'links'%></button></td>
+                    </tr>
+                <%end%>
+            </table>
+            <br />
+            <br />
+            <table class="table table-striped" id="room_category_table">
+                <tr>
+                    <th>Room Category</th>
+                    <th>Price</th>
+                    <th colspan="2" style="text-align:center;">Action</th>
+                </tr>    
+                <% pg_building.categories.each do |category|%>
+                    <tr>
+                        <td><%= category.name%></td>
+                        <td><%= category.price%></td>
+                        <td><%= link_to 'Update', class:'links'%></td>
+                        <td><%= link_to 'Delete', class: 'links'%></td>
+                    </tr>
+                <%end%>
+            </table>
+        </div>
+    </div>
+<%else%>
+    <div class="main_container">
+        <h1><%= pg_building.name%></h1>
+        <div class="image-container">
+            <% if pg_building.image.present? %>
+                <%= image_tag url_for(pg_building.image), class: "image" %>
+            <% else %>
+                <p class="no_image", style="padding-left:20%;">No image available</p>
+            <% end %>
+        </div>
+        <br />
+        <br />
+        <p>Location:&nbsp &nbsp<%= pg_building.address%></p>
+        <br />
+        <u><h4>Rooms Available</h4></u>
+        <div class="data">
+            <table class="table table-striped">
+                <tr>
+                    <th>Room Type</th>
+                    <th>Category</th>
+                </tr>    
+                <% pg_building.avaeach do |room|%>
+                    <tr>
+                        <td><%= room.room_types.name%></td>
+                        <td><%= room.categories.name%></td>
+                    </tr>
+                <%end%>
+            </table>
+            
+                    
+            </div>
+        </div>
+    </div>
+<%end%>
+
+
+<script>
+        $('#add_room_type').on('click', function(){
+            const AddRoomType = document.getElementById('add_room_type');
+            const myModal = document.getElementById('roomModal');
+            
+
+            myModal.addEventListener('shown.bs.modal', () => {
+                AddOwnerInput.focus();
+            });
+      });
+      $('#add_category').on('click', function(){
+            const AddCategoryType = document.getElementById('add_category');
+            const myModal = document.getElementById('categoryModal');
+            
+
+            myModal.addEventListener('shown.bs.modal', () => {
+                AddOwnerInput.focus();
+            });
+      });
+    </script>

@@ -1,0 +1,53 @@
+.main_container {
+  margin-top: 3%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+.main_container .image-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.main_container .image-container .image {
+  width: 80%;
+  height: 500px;
+}
+p {
+  font-size: 25px;
+}
+.main_container .data {
+  display: flex;
+}
+.main_container .table {
+  text-align: left;
+  width: 40%;
+}
+.main_container .form_container {
+  border: 2px solid rgba(87, 86, 86, 0.529);
+  width: 35%;
+  text-align: right;
+  margin-left: 15%;
+  border-radius: 7px;
+}
+#price-calculation-form {
+  padding-right: 25%;
+}
+#room-type-select {
+  width: 60%;
+  font-size: 18px;
+}
+#category-select {
+  width: 60%;
+  font-size: 18px;
+}
+.form_container p {
+  padding-right: 40%;
+}
+
+.room_data #room_type_table {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-left: 7%;
+  border-spacing: 15px;
+}

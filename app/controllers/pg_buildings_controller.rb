@@ -22,6 +22,9 @@ class PgBuildingsController < ApplicationController
   #To create the new PG Building
   def create
     @current_owner = current_user.owner
+    @name=building_params[:name]
+    # puts ("=======================================")
+    puts @name
     new_building = @current_owner.pg_buildings.create(building_params)
     if new_building.save
       redirect_to root_path, notice: "Building added sucessfully"
@@ -32,7 +35,7 @@ class PgBuildingsController < ApplicationController
 
   #To destroy the PG Building
   def destroy
-    puts("=========================================================")
+    # puts("=========================================================")
     building=PgBuilding.find_by(id: params[:id])
     if building.destroy
       redirect_to root_path, notice: "Building deleted"

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pg_building: one
+  room_type: one
+  category: one
+  room_price: 1
+  availability: 1
+
+two:
+  pg_building: two
+  room_type: two
+  category: two
+  room_price: 1
+  availability: 1
