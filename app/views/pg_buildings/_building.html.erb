@@ -1,10 +1,10 @@
 <% if current_user && current_user.owner?%>
-       <%= render partial: "room_modal"%>
-       <%= render partial: "category_modal"%>
+       <%= render partial: "modal", locals: {pg_building: pg_building}%>
      <div class="main_container">
          <div class="action_buttons",style="margin-left: 30%;">
             <button type="button" id="add_room_type" class="btn" data-bs-toggle="modal" data-bs-target="#roomModal">Add Room Type</button>
             <button type="button" id="add_category" class="btn" data-bs-toggle="modal" data-bs-target="#categoryModal">Add Room Category</button>
+            <button type="button" id="add_availability" class="btn" data-bs-toggle="modal" data-bs-target="#availabilityModal">Add Room Availability</button>
 
         </div>
         <br />
@@ -27,7 +27,7 @@
             <table class="table table-striped" id="room_type_table">
                 <tr>
                     <th>Room Type</th>
-                    <th>Price</th>
+                    <th>Price(per Person)</th>
                     <th colspan="2" style="text-align:center;">Action</th>
                 </tr>    
                 <% pg_building.room_types.each do |room|%>
@@ -45,16 +45,38 @@
             <table class="table table-striped" id="room_type_table">
                 <tr>
                     <th>Room Category</th>
-                    <th>Price</th>
+                    <th>Extra Price</th>
                     <th colspan="2" style="text-align:center;">Action</th>
                 </tr>    
                 <% pg_building.categories.each do |category|%>
                     <tr>
                         <td><%= category.name%></td>
                         <td><%= category.price%></td>
-                        <td><%= link_to 'Update', class:'links'%></td>
-                        <td><%= link_to 'Delete', class: 'links'%></td>
+                        <td><button type="button" class="btn"><%= link_to 'Update',root_path,class: 'links'%></button></td>
+                        <td><button type="button" class="btn"><%= link_to 'Delete',root_path,class: 'links'%></button></td>
                     </tr>
+                <%end%>
+            </table>
+             <u><h4>Available Rooms</h4></u>
+            <table class="table table-striped" id="room_type_table">
+                <tr>
+                    <th>Room Type</th>
+                    <th>Category</th>
+                    <th>Availability</th>
+                    <th>Price(per night)</th>
+                    <th colspan="2" style="text-align:center;">Action</th>
+                </tr>    
+                <% pg_building.room_types.each do |room_type|%>
+                    <% room_type.available_rooms.each do |room|%>
+                        <tr>
+                            <td><%= room.room_type.name%></td>
+                            <td><%= room.category.name%></td>
+                            <td><%= room.availability%></td>
+                            <td><%= room.room_price%></td>
+                             <td><button type="button" class="btn"><%= link_to 'Update',root_path,class: 'links'%></button></td>
+                        <td><button type="button" class="btn"><%= link_to 'Delete',root_path,class: 'links'%></button></td>
+                        </tr>
+                    <%end%>
                 <%end%>
             </table>
         </div>
@@ -74,7 +96,7 @@
         <p>Location:&nbsp &nbsp<%= pg_building.address%></p>
         <br />
         <u><h4>Rooms Available</h4></u>
-        <div class="room_data">
+        <div class="data">
             <table class="table table-striped">
                 <tr>
                     <th>Room Type</th>
@@ -94,8 +116,8 @@
                     <%end%>
                 <%end%>
             </table>
-            
-                    
+            <div class="payment_container">
+                <h4>Choose your Requirement:</h4>
             </div>
         </div>
     </div>
@@ -115,6 +137,15 @@
       $('#add_category').on('click', function(){
             const AddCategoryType = document.getElementById('add_category');
             const myModal = document.getElementById('categoryModal');
+            
+
+            myModal.addEventListener('shown.bs.modal', () => {
+                AddOwnerInput.focus();
+            });
+      });
+      $('#add_availability').on('click', function(){
+            const AddCategoryType = document.getElementById('add_availability');
+            const myModal = document.getElementById('availabilityModal');
             
 
             myModal.addEventListener('shown.bs.modal', () => {

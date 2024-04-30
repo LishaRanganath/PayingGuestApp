@@ -7,13 +7,11 @@
   display: flex;
   justify-content: center;
   width: 100%;
-
 }
 .main_container .image-container .image {
   width: 80%;
   height: 500px;
   box-shadow: 0 0 10px rgba(83, 74, 74, 0.8);
-
 }
 p {
   font-size: 25px;
@@ -22,14 +20,14 @@ p {
   display: flex;
 }
 .main_container .table {
-  text-align: left;
-  width: 40%;
+  text-align: center;
+  width: 50%;
 }
-.main_container .form_container {
+.main_container .payment_container {
   border: 2px solid rgba(87, 86, 86, 0.529);
   width: 35%;
-  text-align: right;
-  margin-left: 15%;
+  text-align: center;
+  margin-left: 12%;
   border-radius: 7px;
 }
 #price-calculation-form {
@@ -56,6 +54,6 @@ p {
   max-width: 800px; /* Set a maximum width if needed */
   margin: 0 auto; /* Center the table horizontally */
 }
-.room_data .table{
+.room_data .table {
   width: 50%;
 }

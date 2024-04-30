@@ -1,6 +1,7 @@
 <html>
     <head>
         <%= javascript_include_tag 'owners' %>
+        <%= stylesheet_link_tag 'modal', media: 'all', 'data-turbolinks-track': 'reload' %>
     </head>
     <body>
         <%= render partial: "modal"%>
@@ -8,7 +9,6 @@
             <div class="dashboard">
                 <h1>Dashboard</h1>
                 <p><%= Date.today.strftime("%d-%m-%Y") %></p>
-                <p><%=Time.now%></p>
             </div>
             <div class="search">
             </div>
@@ -19,6 +19,7 @@
                     <span><%= current_user.admin.name %></span>
             </div>
         </div>
+        <hr>
         <div class="action_buttons">
             <button type="button" id="add_owner_input" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Owner</button>
             <button type="button" id="myInput1" class="btn"><%= link_to 'Edit Owner',owners_path,class:"links"%></button>
@@ -81,7 +82,7 @@
                                 <%end%>
                                     <div class="content">
                                         <div class="details">
-                                            <p><%=building.name%></p>
+                                            <b><p><%=building.name%></p></b>
                                             <p>phone: <%=building.phone%></p>
                                             <p><%=building.email%></p>
                                             <p><%=building.address%></p>

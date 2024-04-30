@@ -1,10 +1,18 @@
 <html>
-  <head></head>
+  <head>
+    <style>
+      .form-container{
+        display:flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
   <body>
+    <div class="form-container">
       <%= form_with(model: owner,url: path, method: method) do |form| %>
         <div class="field">
-          <%= form.label :name, "Owner Name" %><br>
-          <%= form.text_field :name %>
+          <%= form.label :name, "Owner Name"%><br>
+          <%= form.text_field :name , id:"name"%>
         </div>
         <div class="field">
           <%= form.label :phone, "Phone Number" %><br>

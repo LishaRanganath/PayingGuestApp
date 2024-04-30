@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  /* background-image: url("home.jpeg"); */
+  background-image: url("home.jpeg");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -61,19 +61,17 @@ body {
   margin: 0 10px;
   opacity: 0.9;
 }
-.container_grid .row .col .btn{
+.container_grid .row .col .btn {
   border: 2px solid black;
   width: 300px;
-  
 }
-.container_grid .row .col .btn .links{
+.container_grid .row .col .btn .links {
   text-decoration: none;
   color: black;
   padding-left: 20%;
 }
-.container_grid .row .col .btn:hover{
+.container_grid .row .col .btn:hover {
   background-color: #12111142;
-
 }
 .register_container {
   height: 100%;
@@ -117,7 +115,6 @@ body {
   padding: 10px;
   column-gap: 50px;
   row-gap: 50px;
- 
 }
 .grid-container .item {
   padding: 20px;
@@ -127,12 +124,11 @@ body {
   background-color: rgba(241, 235, 235, 0.894);
 }
 .grid-container .image {
-    height: 250px;
-    width: 300px;
-    box-shadow: 0 0 10px rgba(83, 74, 74, 0.8);
-
+  height: 250px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(83, 74, 74, 0.8);
 }
-.grid-container .no_image{
+.grid-container .no_image {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,28 +137,28 @@ body {
   width: 300px;
   color: red;
 }
-.grid-container a{
+.grid-container a {
   text-decoration: none;
 }
-.grid-container .content{
+.grid-container .content {
   margin-top: 10%;
   display: flex;
   /* justify-content: space-between; */
 }
-.grid-container .content .details{
+.grid-container .content .details {
   text-align: left;
   color: black;
   width: 50%;
 }
-.grid-container .content .details p{
+.grid-container .content .details p {
   font-size: 18px;
 }
-.grid-container .content .actions{
+.grid-container .content .actions {
   text-align: right;
   width: 50%;
   /* float: inline-end; */
 }
-.grid-container .content .actions .btn{
+.grid-container .content .actions .btn {
   width: 100px;
   height: 50px;
 }
@@ -180,9 +176,8 @@ body {
   width: 500px;
   height: 50px;
   font-size: 20px;
-  
 }
-.action_buttons .btn .links{
+.action_buttons .btn .links {
   text-decoration: none;
   font-size: 20px;
   padding-left: 25%;

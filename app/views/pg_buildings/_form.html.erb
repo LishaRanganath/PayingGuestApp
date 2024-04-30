@@ -1,6 +1,6 @@
 <%= form_with(model: pg_building, url: pg_buildings_path , method: :post) do |form| %>
     <div class="field">
-    <%= form.label :name, "Name:" %><br>
+    <%= form.label :name, "Name:" ,style: "text-align: left;"%><br>
     <%= form.text_field :name %>
     </div>
 
