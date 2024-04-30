@@ -9,8 +9,9 @@
             <div class="dashboard">
                 <h1>Dashboard</h1>
                 <p><%= Date.today.strftime("%d-%m-%Y") %></p>
-                <p><%=Time.now%></p>
+                
             </div>
+            
             <div class="search">
             </div>
             <div class="pfp_image">
@@ -20,6 +21,7 @@
                     <span><%= current_user.owner.name%></span>
             </div>
         </div>
+        <hr>
         <div class="action_buttons">
             <button type="button" id="add_owner_input" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Building</button>       
         </div>
@@ -39,8 +41,8 @@
                                 <%end%>
                                     <div class="content">
                                         <div class="details">
-                                            <p><%=building.name%></p>
-                                            <p>phone: <%=building.phone%></p>
+                                            <b><p><%=building.name%></p></b>
+                                            <p><%=building.phone%></p>
                                             <p><%=building.email%></p>
                                             <p><%=building.address%></p>
                                         </div>

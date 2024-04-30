@@ -22,8 +22,8 @@
         <br />
         <p>Location:&nbsp &nbsp<%= pg_building.address%></p>
         <br />
-        <u><h4>Rooms Available</h4></u>
-        <div class="room_data">
+        <div class="room_data1">
+            <u><h4>Room Types</h4></u>
             <table class="table table-striped" id="room_type_table">
                 <tr>
                     <th>Room Type</th>
@@ -34,14 +34,15 @@
                     <tr>
                         <td><%= room.name%></td>
                         <td><%= room.price%></td>
-                        <td><button type="button" class="btn"><%= link_to 'Update',class: 'links'%></button></td>
-                        <td><button type="button" class="btn"><%= link_to 'Delete',class: 'links'%></button></td>
+                        <td><button type="button" class="btn"><%= link_to 'Update',root_path,class: 'links'%></button></td>
+                        <td><button type="button" class="btn"><%= link_to 'Delete',root_path,class: 'links'%></button></td>
                     </tr>
                 <%end%>
             </table>
             <br />
             <br />
-            <table class="table table-striped" id="room_category_table">
+            <u><h4>Room Catgory</h4></u>
+            <table class="table table-striped" id="room_type_table">
                 <tr>
                     <th>Room Category</th>
                     <th>Price</th>
@@ -73,17 +74,24 @@
         <p>Location:&nbsp &nbsp<%= pg_building.address%></p>
         <br />
         <u><h4>Rooms Available</h4></u>
-        <div class="data">
+        <div class="room_data">
             <table class="table table-striped">
                 <tr>
                     <th>Room Type</th>
                     <th>Category</th>
+                    <th>Availability</th>
+                    <th>Price(per Night)</th>
+
                 </tr>    
-                <% pg_building.avaeach do |room|%>
-                    <tr>
-                        <td><%= room.room_types.name%></td>
-                        <td><%= room.categories.name%></td>
-                    </tr>
+                <% pg_building.room_types.each do |room_type|%>
+                    <% room_type.available_rooms.each do |room|%>
+                        <tr>
+                            <td><%= room.room_type.name%></td>
+                            <td><%= room.category.name%></td>
+                            <td><%= room.availability%></td>
+                            <td><%= room.room_price%></td>
+                        </tr>
+                    <%end%>
                 <%end%>
             </table>
             
