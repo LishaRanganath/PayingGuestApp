@@ -34,8 +34,8 @@
                     <tr>
                         <td><%= room.name%></td>
                         <td><%= room.price%></td>
-                        <td><button type="button" class="btn"><%= link_to 'Update',root_path,class: 'links'%></button></td>
-                        <td><button type="button" class="btn"><%= link_to 'Delete',root_path,class: 'links'%></button></td>
+                        <td><%= link_to 'Update',edit_room_type_path(id: room.id),class: 'btn'%></td>
+                        <td><%= button_to 'Delete',room_type_path(id: room.id),class: 'btn',method: :delete%></td>
                     </tr>
                 <%end%>
             </table>
@@ -52,8 +52,8 @@
                     <tr>
                         <td><%= category.name%></td>
                         <td><%= category.price%></td>
-                        <td><button type="button" class="btn"><%= link_to 'Update',root_path,class: 'links'%></button></td>
-                        <td><button type="button" class="btn"><%= link_to 'Delete',root_path,class: 'links'%></button></td>
+                        <td><%= link_to 'Update',edit_category_path(id: category.id),class: 'btn'%></td>
+                        <td><%= button_to 'Delete',category_path(id: category.id),class: 'btn',method: :delete%></td>
                     </tr>
                 <%end%>
             </table>
@@ -73,8 +73,8 @@
                             <td><%= room.category.name%></td>
                             <td><%= room.availability%></td>
                             <td><%= room.room_price%></td>
-                             <td><button type="button" class="btn"><%= link_to 'Update',root_path,class: 'links'%></button></td>
-                        <td><button type="button" class="btn"><%= link_to 'Delete',root_path,class: 'links'%></button></td>
+                            <td><button type="button" class="btn"><%= link_to 'Update',root_path,class: 'links'%></button></td>
+                            <td><%= button_to 'Delete',available_room_path(id: room.id, pg_building_id: room.room_type.pg_building.id),class: 'btn',method: :delete%></td>
                         </tr>
                     <%end%>
                 <%end%>
@@ -136,7 +136,16 @@
             myModal.addEventListener('shown.bs.modal', () => {
                 AddOwnerInput.focus();
             });
-      });
+        });
+        $('#update_room_type').on('click', function(){
+                const AddRoomType = document.getElementById('update_room_type');
+                const myModal = document.getElementById('updateRoomModal');
+                
+
+                myModal.addEventListener('shown.bs.modal', () => {
+                    AddOwnerInput.focus();
+                });
+        });
       $('#add_category').on('click', function(){
             const AddCategoryType = document.getElementById('add_category');
             const myModal = document.getElementById('categoryModal');
