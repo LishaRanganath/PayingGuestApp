@@ -1,0 +1,26 @@
+<div class="grid-container", style="width: 100%">
+            <%@pg_buildings.each do |building|%>
+                        <%if building.owner.status == "active"%>
+                            <div class="item", id="building">
+                                 <%=link_to pg_building_path(building.id), method: :get do%>
+                                
+                                    <div class="image_container">
+                                        <% if building.image.present? %>
+                                            <%= image_tag url_for(building.image), class: "image" %>
+                                        <% else %>
+                                            <p class="no_image", style="padding-left:20%;">No image available</p>
+                                        <% end %>
+                                    </div>
+                                <%end%>
+                                    <div class="content">
+                                        <div class="details">
+                                            <b><p><%=building.name%></p></b>
+                                            <p>phone: <%=building.phone%></p>
+                                            <p><%=building.email%></p>
+                                            <p><%=building.address%></p>
+                                        </div>
+                                    </div>
+                            </div>
+                        <%end%>
+            <%end%>
+        </div>

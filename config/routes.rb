@@ -14,11 +14,13 @@ Rails.application.routes.draw do
       get 'list'
     end
   end
-  resources :available_rooms do
-    member do
-      post 'calculate_price'
-    end
-  end
+  resources :available_rooms
+  resources :room_bookings
+  post '/calculate_price', to: 'room_bookings#calculate_price'
+    # member do
+    #   post 'calculate_price'
+    # end
+  # end
   resources :room_types
   resources :categories
   # get "pg_building/:id",to:"pg_building#index"

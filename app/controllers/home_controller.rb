@@ -5,5 +5,9 @@ class HomeController < ApplicationController
       @deactive_count = current_user.admin.owners.where(status: "deactive").count
       @active_count = current_user.admin.owners.where(status: "active").count
     end
+    respond_to do |format|
+      format.html
+      format.js { render json: { active_count: @active_count, deactive_count: @deactive_count } }
+    end
   end
 end

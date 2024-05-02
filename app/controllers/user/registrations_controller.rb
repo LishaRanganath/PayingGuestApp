@@ -49,6 +49,11 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   # protected
 
+  # def after_sign_up_path_for(resource)
+  #   return_to_pg_building = session.delete(:return_to_pg_building)
+  #   return_to_pg_building || root_path
+  # end
+
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sanitized_params
   #   devise_parameter_sanitized.for(:sign_up) do |u|

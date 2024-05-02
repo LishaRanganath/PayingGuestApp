@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_29_102332) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_042648) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -76,6 +76,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_102332) do
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
+  create_table "durations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.integer "number_of_days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "owners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "phone"
@@ -98,6 +105,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_102332) do
     t.datetime "updated_at", null: false
     t.bigint "owner_id", null: false
     t.index ["owner_id"], name: "index_pg_buildings_on_owner_id"
+  end
+
+  create_table "room_bookings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.bigint "room_type_id", null: false
+    t.bigint "category_id", null: false
+    t.date "start_date"
+    t.bigint "duration_id", null: false
+    t.integer "total_price"
+    t.integer "number_of_guests"
+    t.integer "number_of_rooms"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_room_bookings_on_category_id"
+    t.index ["customer_id"], name: "index_room_bookings_on_customer_id"
+    t.index ["duration_id"], name: "index_room_bookings_on_duration_id"
+    t.index ["room_type_id"], name: "index_room_bookings_on_room_type_id"
   end
 
   create_table "room_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -134,6 +158,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_102332) do
   add_foreign_key "owners", "admins"
   add_foreign_key "owners", "users"
   add_foreign_key "pg_buildings", "owners"
+  add_foreign_key "room_bookings", "categories"
+  add_foreign_key "room_bookings", "customers"
+  add_foreign_key "room_bookings", "durations"
+  add_foreign_key "room_bookings", "room_types"
   add_foreign_key "room_types", "pg_buildings"
   add_foreign_key "users", "customers"
 end

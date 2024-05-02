@@ -118,8 +118,11 @@
             </table>
             <div class="payment_container">
                 <h4>Choose your Requirement:</h4>
+                <%=render partial:"room_bookings/form",locals: {pg_building: pg_building}%>
             </div>
         </div>
+        <br />
+        <br />
     </div>
 <%end%>
 

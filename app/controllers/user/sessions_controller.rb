@@ -18,7 +18,21 @@ class User::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
+
+
+  def after_sign_in_path_for(resource)
+    stored_location = session[:stored_location]
+
+    # Check if there's stored form data
+    if stored_location.present? && session[:booking_form_data].present?
+      # Redirect to the stored location (the form page) with pre-populated data
+      stored_location
+    else
+      # Redirect to the default path after sign-in
+      super
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

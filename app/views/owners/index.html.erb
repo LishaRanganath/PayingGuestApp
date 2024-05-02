@@ -17,11 +17,11 @@
                         <td><%= owner.phone%></td>
                         <td><%= owner.status%></td>
                         <%if owner.status=="deactive"%>
-                            <td><button type="button" class="btn"><%= link_to 'Activate',activate_owner_path(owner),class: 'links'%></button></td>
+                            <td><button type="button" class="btn" id="activate_button"><%= link_to 'Activate',activate_owner_path(owner),class: 'links'%></button></td>
                             <td><button type="button" class="btn disabled"><%= link_to 'Deactivate ','#',class: 'links',:html => {:disabled => true} %></button></td>     
                         <%else%>
                             <td><button type="button" class="btn disabled"><%= link_to 'Activate','#',class: 'links',:html => {:disabled => true} %></button></td>     
-                            <td><button type="button" class="btn"><%= link_to 'Deactivate',deactivate_owner_path(owner),class: 'links'%></button></td>
+                            <td><button type="button" class="btn" id="deactivate_button"><%= link_to 'Deactivate',deactivate_owner_path(owner),class: 'links'%></button></td>
                         <%end%>
                         <td><button type="button" class="btn"><%= link_to 'View PGs', list_pg_building_path(owner.id),class: 'links'%></button></td>
                         <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editModal_<%= owner.id %>">Edit Owner</button></td>

@@ -68,7 +68,7 @@
         </div>
         <div class="grid-container", style="width: 100%">
             <%@pg_buildings.each do |building|%>
-                        <%if building.owner.status == "active"%>
+                        <%if building.owner.status == "active" && building.owner.admin == current_user.admin%>
                             <div class="item", id="building">
                                  <%=link_to pg_building_path(building.id), method: :get do%>
                                 
