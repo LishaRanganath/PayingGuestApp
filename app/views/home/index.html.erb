@@ -2,8 +2,10 @@
     <head>
         <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'count'%>
+        <%= javascript_include_tag 'search' %>
     </head>
     <body >
+    <%= render partial: "search_results" %>
         <% if current_user %>
             <% if admin_log_in? %>
                 <%= render partial: "admin"%>
@@ -15,6 +17,12 @@
                 <%= render partial: "customer"%>
             <%end%>
         <%else%>
+             <div id="search-form">
+                <%= form_tag search_buildings_path, method: :get, remote: true do %>
+                    <%= text_field_tag :query, params[:query], placeholder: "Search buildings..." %>
+                    <%= submit_tag "Search", class: "btn-primary" %>
+                <% end %>
+            </div>
             <div class="grid-container", style="width: 100%">
             <%@pg_buildings.each do |building|%>
                         <%if building.owner.status == "active"%>

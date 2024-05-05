@@ -1,0 +1,12 @@
+<% if @resultant_buildings.present? %>
+  <div id="search-results" class="pg-buildings-container grid-container" style="width: 100%">
+    <% @resultant_buildings.each do |building| %>
+      <div class="building">
+        <%= building.name %>
+        <!-- Add other building details here -->
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No search results found.</p>
+<% end %>

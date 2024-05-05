@@ -1,5 +1,16 @@
 # To handle all the actions of the PG Buildings
 class PgBuildingsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  
+  def search
+    # debugger
+    @resultant_buildings = PgBuilding.where("name LIKE ?", "%#{params[:query]}%").order("LOWER(name)")
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  
   def list
     owner=Owner.find_by(id: params[:id])
     @owner_buildings=owner.pg_buildings
@@ -43,6 +54,8 @@ class PgBuildingsController < ApplicationController
       redirect_to root_path, notice: "Building cannot be deleted"
     end
   end
+
+  
 
 
   private
