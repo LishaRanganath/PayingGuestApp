@@ -1,7 +1,7 @@
 <html>
     <head>
         <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
-
+        <%= javascript_include_tag 'owners' %>
     </head>
     <body>
         <%= render partial: "modal"%>
@@ -26,49 +26,30 @@
             <button type="button" id="add_owner_input" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Building</button>       
         </div>
         <div class="grid-container">
-            <%@pg_buildings.each do |building|%>
-                        <%if building.owner_id == current_user.owner.id && building.owner.status == "active"%>
-                            <div class="item", id="building">
-                                 <%=link_to pg_building_path(building.id), method: :get do%>
-                                
-                                    <div class="image_container">
-                                        <% if building.image.present? %>
-                                            <%= image_tag url_for(building.image), class: "image" %>
-                                        <% else %>
-                                            <p class="no_image", style="padding-left:20%;">No image available</p>
-                                        <% end %>
-                                    </div>
-                                <%end%>
-                                    <div class="content">
-                                        <div class="details">
-                                            <b><p><%=building.name%></p></b>
-                                            <p><%=building.phone%></p>
-                                            <p><%=building.email%></p>
-                                            <p><%=building.address%></p>
-                                        </div>
-                                        <div class="actions">
-                                            <%= button_to 'Delete', pg_building_path(building.id), method: :delete, data: { confirm: 'Are you sure?' },class:"btn" %>
-                                            <br />
-                                            <br />
-                                            <button class="btn"><%= link_to 'Edit',class:'links'%></button>
-                                        </div>
-                                    </div>
-                                
-                            </div>
-                            
-                        <%end%>
+            <%all_pg_buildings_owner(@pg_buildings,current_user).each do |building| %>
+                <div class="item", id="building">
+                    <%=link_to pg_building_path(building.id), method: :get do%>
+                        <div class="image_container">
+                            <%= building_image_tag(building) %>
+                        </div>
+                    <%end%>
+                    <div class="content">
+                        <div class="details">
+                            <b><p><%=building.name%></p></b>
+                            <p><%=building.phone%></p>
+                            <p><%=building.email%></p>
+                            <p><%=building.address%></p>
+                        </div>
+                        <div class="actions">
+                            <%= button_to 'Delete', pg_building_path(building.id), method: :delete, data: { confirm: 'Are you sure?' },class:"btn" %>
+                            <br />
+                            <br />
+                            <button class="btn"><%= link_to 'Edit',class:'links'%></button>
+                        </div>
+                    </div>
+                    
+                </div>
             <%end%>
         </div>
     </body>
-    <script>
-        $('#add_building_input').on('click', function(){
-            const AddBuildingInput = document.getElementById('add_owner_input');
-            const myModal = document.getElementById('myModal');
-            
-
-            myModal.addEventListener('shown.bs.modal', () => {
-                AddBuildingInput.focus();
-            });
-      });
-    </script>
 </html>

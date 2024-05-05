@@ -52,56 +52,32 @@
                 <div class="col">
                     <h4>Total PG's</h4>
                     <br />
-                    <%count = 0%>
-                    <% current_user.admin.owners.each do |owner| %>
-                        <% if owner.status=="active" %>
-                            <%owner.pg_buildings.each do |building|%>
-                                <%count=count+1%>
-                            <%end%>
-                        <%end%>
-                    <%end%>
-                    <h6><%= count %></h6>
+                    <b><%= active_buildings_count(current_user)%></b>
+                    <br />
                     <br />
                     <button type="button" class="btn"><%= link_to 'View All', '#', method: :get,class:"links"%></button>
                 </div>
             </div>
         </div>
         <div class="grid-container", style="width: 100%">
-            <%@pg_buildings.each do |building|%>
-                        <%if building.owner.status == "active" && building.owner.admin == current_user.admin%>
-                            <div class="item", id="building">
-                                 <%=link_to pg_building_path(building.id), method: :get do%>
-                                
-                                    <div class="image_container">
-                                        <% if building.image.present? %>
-                                            <%= image_tag url_for(building.image), class: "image" %>
-                                        <% else %>
-                                            <p class="no_image", style="padding-left:20%;">No image available</p>
-                                        <% end %>
-                                    </div>
-                                <%end%>
-                                    <div class="content">
-                                        <div class="details">
-                                            <b><p><%=building.name%></p></b>
-                                            <p>phone: <%=building.phone%></p>
-                                            <p><%=building.email%></p>
-                                            <p><%=building.address%></p>
-                                        </div>
-                                    </div>
+            <% filtered_pg_buildings(@pg_buildings, current_user).each do |building| %>
+                    <div class="item", id="building">
+                        <%=link_to pg_building_path(building.id), method: :get do%>
+                    
+                            <div class="image_container">
+                                <%= building_image_tag(building) %>
                             </div>
                         <%end%>
+                            <div class="content">
+                                <div class="details">
+                                    <b><p><%=building.name%></p></b>
+                                    <p>phone: <%=building.phone%></p>
+                                    <p><%=building.email%></p>
+                                    <p><%=building.address%></p>
+                                </div>
+                            </div>
+                    </div>
             <%end%>
         </div>
     </body>
-    <script>
-        $('#add_owner_input').on('click', function(){
-            const AddOwnerInput = document.getElementById('add_owner_input');
-            const myModal = document.getElementById('exampleModal');
-            
-
-            myModal.addEventListener('shown.bs.modal', () => {
-                AddOwnerInput.focus();
-            });
-      });
-    </script>
 </html>

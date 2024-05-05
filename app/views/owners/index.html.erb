@@ -26,23 +26,10 @@
                         <td><button type="button" class="btn"><%= link_to 'View PGs', list_pg_building_path(owner.id),class: 'links'%></button></td>
                         <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editModal_<%= owner.id %>">Edit Owner</button></td>
                         <td><%= button_to 'Delete', owner_path(owner.id), method: :delete, data: { confirm: 'Are you sure?' },class:"btn" %></td>
-                        
-                        <%= render partial: "modal", locals: { owner: owner } %>
                     </tr>
                     
                 <% end %>
             </table>
         </div>
     </body>
-    <script>
-        $('#edit_owner').on('click', function(){
-            const EditOwnerInput = document.getElementById('edit_owner');
-            const myModal = document.getElementById('editModal');
-            
-
-            myModal.addEventListener('shown.bs.modal', () => {
-                EditOwnerInput.focus();
-            });
-      });
-    </script>
 </html>

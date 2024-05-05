@@ -2,19 +2,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <% if current_user.role == "owner"%>
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Building</h1>
-                <%else%>
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Owner</h1>
-                <%end%>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"><%= modal_title_based_on_role(current_user)%></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body"> 
-                <% if current_user.role == "owner"%>
-                    <%= render partial:"pg_buildings/new"%>
-                <%else%>
-                    <%= render partial:"owners/form",locals: { owner: Owner.new, path: owners_path, method: :post }%>
-                <%end%>
+               <%= render_patial_based_on_role(current_user)%>
             </div>
         </div>
     </div>

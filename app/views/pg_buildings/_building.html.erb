@@ -1,167 +1,121 @@
-<% if current_user && current_user.owner?%>
-       <%= render partial: "modal", locals: {pg_building: pg_building}%>
-     <div class="main_container">
-         <div class="action_buttons",style="margin-left: 30%;">
-            <button type="button" id="add_room_type" class="btn" data-bs-toggle="modal" data-bs-target="#roomModal">Add Room Type</button>
-            <button type="button" id="add_category" class="btn" data-bs-toggle="modal" data-bs-target="#categoryModal">Add Room Category</button>
-            <button type="button" id="add_availability" class="btn" data-bs-toggle="modal" data-bs-target="#availabilityModal">Add Room Availability</button>
+<html>
+    <head>
+        <%= javascript_include_tag 'building' %>
 
-        </div>
-        <br />
-        <br />
-        <h1><%= pg_building.name%></h1>
-        <div class="image-container">
-            <% if pg_building.image.present? %>
-                <%= image_tag url_for(pg_building.image), class: "image" %>
-            <% else %>
-                <p class="no_image", style="padding-left:20%;">No image available</p>
-            <% end %>
-        </div>
-        <br />
+    </head>
+    <body>
+        <% if is_owner?%>
+            <%= render partial: "modal", locals: {pg_building: pg_building}%>
+            <div class="main_container">
+                <div class="action_buttons",style="margin-left: 30%;">
+                <button type="button" id="add_room_type" class="btn" data-bs-toggle="modal" data-bs-target="#roomModal">Add Room Type</button>
+                <button type="button" id="add_category" class="btn" data-bs-toggle="modal" data-bs-target="#categoryModal">Add Room Category</button>
+                <button type="button" id="add_availability" class="btn" data-bs-toggle="modal" data-bs-target="#availabilityModal">Add Room Availability</button>
 
-        <br />
-        <p>Location:&nbsp &nbsp<%= pg_building.address%></p>
-        <br />
-        <div class="room_data1">
-            <u><h4>Room Types</h4></u>
-            <table class="table table-striped" id="room_type_table">
-                <tr>
-                    <th>Room Type</th>
-                    <th>Price(per Person)</th>
-                    <th colspan="2" style="text-align:center;">Action</th>
-                </tr>    
-                <% pg_building.room_types.each do |room|%>
-                    <tr>
-                        <td><%= room.name%></td>
-                        <td><%= room.price%></td>
-                        <td><%= link_to 'Update',edit_room_type_path(id: room.id),class: 'btn'%></td>
-                        <td><%= button_to 'Delete',room_type_path(id: room.id),class: 'btn',method: :delete%></td>
-                    </tr>
-                <%end%>
-            </table>
-            <br />
-            <br />
-            <u><h4>Room Catgory</h4></u>
-            <table class="table table-striped" id="room_type_table">
-                <tr>
-                    <th>Room Category</th>
-                    <th>Extra Price</th>
-                    <th colspan="2" style="text-align:center;">Action</th>
-                </tr>    
-                <% pg_building.categories.each do |category|%>
-                    <tr>
-                        <td><%= category.name%></td>
-                        <td><%= category.price%></td>
-                        <td><%= link_to 'Update',edit_category_path(id: category.id),class: 'btn'%></td>
-                        <td><%= button_to 'Delete',category_path(id: category.id),class: 'btn',method: :delete%></td>
-                    </tr>
-                <%end%>
-            </table>
-             <u><h4>Available Rooms</h4></u>
-            <table class="table table-striped" id="room_type_table">
-                <tr>
-                    <th>Room Type</th>
-                    <th>Category</th>
-                    <th>Availability</th>
-                    <th>Price(per night)</th>
-                    <th colspan="2" style="text-align:center;">Action</th>
-                </tr>    
-                <% pg_building.room_types.each do |room_type|%>
-                    <% room_type.available_rooms.each do |room|%>
+                </div>
+                <br />
+                <br />
+                <h1><%= pg_building.name%></h1>
+                <div class="image-container">
+                    <%= building_image_tag(pg_building) %>
+                </div>
+                <br />
+
+                <br />
+                <p>Location:&nbsp &nbsp<%= pg_building.address%></p>
+                <br />
+                <div class="room_data1">
+                    <u><h4>Room Types</h4></u>
+                    <table class="table table-striped" id="room_type_table">
                         <tr>
-                            <td><%= room.room_type.name%></td>
-                            <td><%= room.category.name%></td>
-                            <td><%= room.availability%></td>
-                            <td><%= room.room_price%></td>
-                            <td><button type="button" class="btn"><%= link_to 'Update',root_path,class: 'links'%></button></td>
-                            <td><%= button_to 'Delete',available_room_path(id: room.id, pg_building_id: room.room_type.pg_building.id),class: 'btn',method: :delete%></td>
-                        </tr>
-                    <%end%>
-                <%end%>
-            </table>
-        </div>
-    </div>
-<%else%>
-    <div class="main_container">
-        <h1><%= pg_building.name%></h1>
-        <div class="image-container">
-            <% if pg_building.image.present? %>
-                <%= image_tag url_for(pg_building.image), class: "image" %>
-            <% else %>
-                <p class="no_image", style="padding-left:20%;">No image available</p>
-            <% end %>
-        </div>
-        <br />
-        <br />
-        <p>Location:&nbsp &nbsp<%= pg_building.address%></p>
-        <br />
-        <u><h4>Rooms Available</h4></u>
-        <div class="data">
-            <table class="table table-striped">
-                <tr>
-                    <th>Room Type</th>
-                    <th>Category</th>
-                    <th>Availability</th>
-                    <th>Price(per Night)</th>
-
-                </tr>    
-                <% pg_building.room_types.each do |room_type|%>
-                    <% room_type.available_rooms.each do |room|%>
+                            <th>Room Type</th>
+                            <th>Price(per Person)</th>
+                            <th colspan="2" style="text-align:center;">Action</th>
+                        </tr>    
+                        <%= render_room_types(pg_building.room_types) %>
+                    </table>
+                    <br />
+                    <br />
+                    <u><h4>Room Catgory</h4></u>
+                    <table class="table table-striped" id="room_type_table">
                         <tr>
-                            <td><%= room.room_type.name%></td>
-                            <td><%= room.category.name%></td>
-                            <td><%= room.availability%></td>
-                            <td><%= room.room_price%></td>
-                        </tr>
-                    <%end%>
-                <%end%>
-            </table>
-            <div class="payment_container">
-                <h4>Choose your Requirement:</h4>
-                <%=render partial:"room_bookings/form",locals: {pg_building: pg_building}%>
+                            <th>Room Category</th>
+                            <th>Extra Price</th>
+                            <th colspan="2" style="text-align:center;">Action</th>
+                        </tr>    
+                        <%= render_categories(pg_building.categories) %>
+
+                    </table>
+                    <u><h4>Available Rooms</h4></u>
+                    <table class="table table-striped" id="room_type_table">
+                        <tr>
+                            <th>Room Type</th>
+                            <th>Category</th>
+                            <th>Availability</th>
+                            <th>Price(per night)</th>
+                            <th colspan="2" style="text-align:center;">Action</th>
+                        </tr>    
+                        <%= render_available_rooms(pg_building.room_types) %>
+
+                    </table>
+                </div>
             </div>
-        </div>
-        <br />
-        <br />
-    </div>
-<%end%>
+        <%else%>
+            <div class="main_container">
+                <h1><%= pg_building.name%></h1>
+                <div class="image-container">
+                    <%= building_image_tag(pg_building) %>
+                </div>
+                <br />
+                <br />
+                <div>
+                    <b><h5>Hosted By</h5></b>
+                    <h6><%= pg_building.owner.name%></h6>
+                </div>
+                <hr />
+                <br />
+                <br />
+                <p>Location:&nbsp &nbsp<%= pg_building.address%></p>
+                <br />
+                <u><h4>Rooms Available</h4></u>
+                <div class="data">
+                    <div class="table-data">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Room Type</th>
+                                <th>Category</th>
+                                <th>Availability</th>
+                                <th>Price(per Night)</th>
 
-
-<script>
-        $('#add_room_type').on('click', function(){
-            const AddRoomType = document.getElementById('add_room_type');
-            const myModal = document.getElementById('roomModal');
+                            </tr>    
+                            <%= render_available_rooms(pg_building.room_types) %>
+                        </table>
+                        <br />
+                        <br />
+                        <u><h4>Amenities</h4></u>
+                        <div class="basic">
+                            <div class="amenities">
+                                <p><i class="fa-solid fa-wifi"></i>&nbsp &nbspWifi</p>
+                                <p><i class="fa-solid fa-car"></i>&nbsp &nbsp Free Parking on Premisis</p>
+                            </div>
+                            <div class="amenities-2">
+                                <p><i class="fa-solid fa-utensils"></i>&nbsp &nbspKitchen</p>
+                                <p><i class="fa-solid fa-dumbbell"></i>&nbsp &nbspGym</p>
+                            </div>
+                        </div>
+                    </div>
             
-
-            myModal.addEventListener('shown.bs.modal', () => {
-                AddOwnerInput.focus();
-            });
-        });
-        $('#update_room_type').on('click', function(){
-                const AddRoomType = document.getElementById('update_room_type');
-                const myModal = document.getElementById('updateRoomModal');
-                
-
-                myModal.addEventListener('shown.bs.modal', () => {
-                    AddOwnerInput.focus();
-                });
-        });
-      $('#add_category').on('click', function(){
-            const AddCategoryType = document.getElementById('add_category');
-            const myModal = document.getElementById('categoryModal');
-            
-
-            myModal.addEventListener('shown.bs.modal', () => {
-                AddOwnerInput.focus();
-            });
-      });
-      $('#add_availability').on('click', function(){
-            const AddCategoryType = document.getElementById('add_availability');
-            const myModal = document.getElementById('availabilityModal');
-            
-
-            myModal.addEventListener('shown.bs.modal', () => {
-                AddOwnerInput.focus();
-            });
-      });
-    </script>
+                    <div class="line"></div>
+                    <div class="payment_container">
+                        <h4>Choose your Requirement:</h4>
+                        <%=render partial:"room_bookings/form",locals: {pg_building: pg_building}%>
+                    </div>
+                </div>
+                <br />
+                <br />
+       
+             </div>
+    
+        <%end%>
+    </body>
+</html>

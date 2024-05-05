@@ -39,3 +39,33 @@ $(document).ready(function(){
     
     
 });
+
+$('#add_owner_input').on('click', function(){
+    const AddOwnerInput = document.getElementById('add_owner_input');
+    const myModal = document.getElementById('exampleModal');
+    
+
+    myModal.addEventListener('shown.bs.modal', () => {
+        AddOwnerInput.focus();
+    });
+});
+
+$('#add_building_input').on('click', function(){
+    const AddBuildingInput = document.getElementById('add_owner_input');
+    const myModal = document.getElementById('myModal');
+    
+
+    myModal.addEventListener('shown.bs.modal', () => {
+        AddBuildingInput.focus();
+    });
+});
+
+$('#edit_owner').on('click', function(){
+    const EditOwnerInput = document.getElementById('edit_owner');
+    const myModal = document.getElementById('editModal');
+    
+
+    myModal.addEventListener('shown.bs.modal', () => {
+        EditOwnerInput.focus();
+    });
+});

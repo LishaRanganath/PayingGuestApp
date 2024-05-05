@@ -11,7 +11,7 @@
 .main_container .image-container .image {
   width: 80%;
   height: 500px;
-  box-shadow: 0 0 10px rgba(83, 74, 74, 0.8);
+  box-shadow: 0 0 20px rgba(42, 42, 42, 0.8);
 }
 p {
   font-size: 25px;
@@ -19,9 +19,10 @@ p {
 .main_container .data {
   display: flex;
 }
-.main_container .table {
-  text-align: center;
+.main_container .table-data {
+  text-align: left;
   width: 50%;
+  height: 20%;
 }
 .main_container .payment_container {
   border: 2px solid rgba(87, 86, 86, 0.529);
@@ -57,6 +58,13 @@ p {
 .room_data .table {
   width: 50%;
 }
-.form_field{
-  width:500px
+.line {
+  border-bottom: 1px solid black; /* Or any other border style you prefer */
+  margin-top: 10px; /* Adjust this value to create space between the table and the line */
+}
+.basic{
+  display: flex;
+}
+.basic .amenities-2{
+  padding-left: 15%;
 }
