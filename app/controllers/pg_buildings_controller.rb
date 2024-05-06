@@ -3,13 +3,22 @@ class PgBuildingsController < ApplicationController
   skip_before_action :verify_authenticity_token
   
   def search
-    # debugger
     @resultant_buildings = PgBuilding.where("name LIKE ?", "%#{params[:query]}%").order("LOWER(name)")
-    respond_to do |format|
-      format.js
-    end
+    render partial: "home/search_results" ,locals:{resultant_buildings:@resultant_buildings}
   end
   
+  def filter
+    
+    if params[:query] == 'asc'
+      order_type = params[:query]
+    else
+      order_type = params[:query]
+    end
+    # debugger
+    @resultant_buildings = PgBuilding.order(name: order_type)
+    
+    render partial: "home/search_results" ,locals:{resultant_buildings:@resultant_buildings}
+  end
   
   def list
     owner=Owner.find_by(id: params[:id])
