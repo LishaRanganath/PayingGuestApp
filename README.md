@@ -22,4 +22,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-![Uploading Screenshot 2024-05-06 at 10.21.49 AM.png…]()
