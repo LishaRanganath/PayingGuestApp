@@ -2,6 +2,7 @@
     <head>
         <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'count'%>
+        <%= javascript_include_tag 'search' %>
     </head>
     <body >
         <% if current_user %>
@@ -15,18 +16,28 @@
                 <%= render partial: "customer"%>
             <%end%>
         <%else%>
-            <div class="grid-container", style="width: 100%">
-            <%@pg_buildings.each do |building|%>
+            <div id="search-form">
+                <%= form_with url: search_buildings_path do |f| %>
+                    <%= f.label :Search %>
+                    <%= f.text_field :Search ,id:"search", class: 'form-field'%>
+                    <%= f.submit "Submit" ,id:"submit-btn", class: 'btn'%>
+                <% end %>
+            </div>
+            <div id="filter-form">
+                <%= form_with url: filter_buildings_path do |f| %>
+                    <%= f.select :query, options_for_select([['A-Z', 'asc'], ['Z-A', 'desc'], ['Location', 'loc']]), { prompt: 'Select One' }, id: 'filter-select', class: 'form-field' %>
+                    <%= f.select :room_query, options_for_select([['Sinle-Sharing', 'Single'], ['Double-Sharing', 'Double'], ['Triple-Sharing', 'Triple']]), { prompt: 'Select Room Type' }, id: 'room-select', class: 'form-field' %>
+                    <%= f.select :category_query, options_for_select([['With-AC', 'AC'], ['Without-AC', 'non-ac']]), { prompt: 'Select Room Category' }, id: 'category-select', class: 'form-field' %>
+                    <%= f.submit "Filter" ,id:"filter-btn", class: 'btn'%>
+                <% end %>
+            </div>
+            <div class="grid-container"  style="width: 100%" id="result-div" >
+                     <%@pg_buildings.each do |building|%>
                         <%if building.owner.status == "active"%>
                             <div class="item", id="building">
                                  <%=link_to pg_building_path(building.id), method: :get do%>
-                                
                                     <div class="image_container">
-                                        <% if building.image.present? %>
-                                            <%= image_tag url_for(building.image), class: "image" %>
-                                        <% else %>
-                                            <p class="no_image", style="padding-left:20%;">No image available</p>
-                                        <% end %>
+                                       <%= building_image_tag(building) %>
                                     </div>
                                 <%end%>
                                     <div class="content">
@@ -38,9 +49,9 @@
                                         </div>
                                     </div>
                             </div>
-                        <%end%>
+                <%end%>
             <%end%>
         </div>
-        <% end %>
+       <% end %>
     </body>
 </html>

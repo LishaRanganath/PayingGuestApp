@@ -187,3 +187,34 @@ body {
 .action_buttons .btn:hover {
   background-color: #12111142;
 }
+#search-form {
+  margin-top: 1%;
+  display: flex;
+  justify-content: center;
+}
+#search-form .form-field {
+  width: 500px;
+  height: 50px;
+}
+#search-form .btn {
+  height: 50px;
+  width: 100px;
+  position: relative;
+  font-size: 20px;
+}
+#filter-form {
+  margin-top: 1%;
+  display: flex;
+  justify-content: right;
+  padding-right: 2%;
+}
+#filter-form .form-field {
+  width: 150px;
+  height: 30px;
+}
+#filter-form .btn {
+  height: 35px;
+  width: 90px;
+  /* position: relative; */
+  font-size: 16px;
+}

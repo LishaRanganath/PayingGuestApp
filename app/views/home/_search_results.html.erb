@@ -1,0 +1,23 @@
+<% if resultant_buildings.present? %>
+  <div id="search-results" class="pg-buildings-container grid-container" style="width: 100%">
+    <% resultant_buildings.each do |building| %>
+     <div class="item", id="building">
+                <%=link_to pg_building_path(building.id), method: :get do%>
+                  <div class="image_container">
+                      <%= building_image_tag(building) %>
+                  </div>
+              <%end%>
+                  <div class="content">
+                      <div class="details">
+                          <b><p><%=building.name%></p></b>
+                          <p>phone: <%=building.phone%></p>
+                          <p><%=building.email%></p>
+                          <p><%=building.address%></p>
+                      </div>
+                  </div>
+          </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No search results found.</p>
+<% end %>

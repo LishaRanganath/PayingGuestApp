@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       get 'list'
     end
   end
+  get 'search_buildings', to: 'pg_buildings#search', as: 'search_buildings'
+  get 'filter_buildings', to: 'pg_buildings#filter', as: 'filter_buildings'
   resources :available_rooms
   resources :room_bookings
   post '/calculate_price', to: 'room_bookings#calculate_price'
