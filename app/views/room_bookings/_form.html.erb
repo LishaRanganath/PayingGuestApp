@@ -19,7 +19,7 @@
     </style>
   </head>
   <body>
-    <%= form_with(model: RoomBooking.new, url:   room_bookings_path, id: 'booking-form',method: :post) do |form| %>
+    <%= form_with(model: RoomBooking.new, url:  room_bookings_path, id: 'booking-form',method: :post) do |form| %>
       <%= form.label :room_type_id, "Select Room Type", id: 'label'%><br />
       <%= form.select :room_type_id, options_from_collection_for_select(pg_building.room_types, 'id', 'name'), { prompt: 'Select Room Type' }, id: 'room-type-select',class: 'form-field'  %><br />
 

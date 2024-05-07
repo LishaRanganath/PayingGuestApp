@@ -14,10 +14,13 @@ class PgBuildingsController < ApplicationController
     else
       order_type = params[:query]
     end
-    # debugger
-    @resultant_buildings = PgBuilding.order(name: order_type)
     
-    render partial: "home/search_results" ,locals:{resultant_buildings:@resultant_buildings}
+    resultant_buildings = PgBuilding.order(name: order_type)
+    @results = resultant_buildings.joins(:room_types, :categories)
+                             .where("room_types.name LIKE ? OR categories.name LIKE ?", "%#{params[:room_query]}%", "%#{params[:room_query]}%")
+                             .order("LOWER(room_types.name)", "LOWER(categories.name)")
+    # debugger
+    render partial: "home/search_results" ,locals:{results: @results}
   end
   
   def list
