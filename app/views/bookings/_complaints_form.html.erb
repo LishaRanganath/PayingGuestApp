@@ -1,0 +1,6 @@
+<%= form_with(model: Booking.new , method: :patch) do |form| %>
+    <div class="field">
+    <%= form.label :name, "Name:" ,style: "text-align: left;"%><br>
+    <%= form.text_field :name %>
+    </div>
+<%end%>
