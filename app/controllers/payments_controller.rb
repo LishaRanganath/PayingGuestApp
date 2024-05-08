@@ -1,7 +1,7 @@
 class PaymentsController < ApplicationController
   def new
     @booking_data = session[:booking_data] || {}
-    @payment = Payment.new
+    # @payment = Payment.new
   end
 
   def create

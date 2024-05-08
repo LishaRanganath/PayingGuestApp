@@ -4,8 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :customer, dependent: :destroy
-  accepts_nested_attributes_for :customer
+  has_many :bookings, dependent: :destroy
 
   has_one :owner, dependent: :destroy
   has_one :admin, dependent: :destroy

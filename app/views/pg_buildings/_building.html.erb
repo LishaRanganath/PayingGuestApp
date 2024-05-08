@@ -5,14 +5,14 @@
     </head>
     <body>
     
-        <% if is_owner?%>
+        <% if current_user && current_user.owner%>
             <%= render partial: "modal", locals: {pg_building: pg_building}%>
             <div class="main_container">
                 <div class="action_buttons",style="margin-left: 30%;">
                 <button type="button" id="add_room_type" class="btn" data-bs-toggle="modal" data-bs-target="#roomModal">Add Room Type</button>
                 <button type="button" id="add_category" class="btn" data-bs-toggle="modal" data-bs-target="#categoryModal">Add Room Category</button>
                 <button type="button" id="add_availability" class="btn" data-bs-toggle="modal" data-bs-target="#availabilityModal">Add Room Availability</button>
-
+                
                 </div>
                 <br />
                 <br />

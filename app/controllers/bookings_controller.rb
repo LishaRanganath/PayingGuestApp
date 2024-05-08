@@ -1,28 +1,34 @@
-class RoomBookingsController < ApplicationController
+class BookingsController < ApplicationController
     skip_before_action :verify_authenticity_token
     def create
-        if current_user && current_user.customer
+        # debugger
+        if current_user && current_user.role == "user"
             room = AvailableRoom.find_by(id: booking_params[:available_room_id])
-            debugger
+            # debugger
             number_of_rooms = booking_params[:number_of_rooms].to_i
             duration_id = booking_params[:duration_id]
             number_of_guests = booking_params[:number_of_guests].to_i
+
+            if room.present? && room.availability >= number_of_rooms
               price = calculate_total_price(room, duration_id, number_of_guests)
-              session[:booking_data] = {
-                room_id: room.id,
-                number_of_rooms: number_of_rooms,
-                duration_id: duration_id,
-                number_of_guests: number_of_guests,
-                total_price: price
-              }
-              if price > 0  # Proceed to payment only if the price is greater than zero
-                  redirect_to new_payment_path
-              end
+              room_booking = Booking.new(
+                booking_params.merge(
+                    total_price: price,
+                    user_id: current_user.id  # Set customer_id to current user's ID
+                    )
+                )
+                # debugger
+                if room_booking.save
+                    room.update(availability: room.availability - number_of_rooms)
+                    redirect_to root_path, notice: "Room booked successfully"
+                end
+            else
+                redirect_to root_path, notice: "Room is not available"
+            end
         else
-            # session[:booking_form_data] = params[:room_booking]
-            redirect_to new_user_session_path, notice: "Please sign in to continue"
+            redirect_to new_registration_path, notice: "Login to Book"
         end
-      end
+    end
 
     def calculate_price
         room = AvailableRoom.find_by(id: params[:available_room_id])
@@ -42,11 +48,11 @@ class RoomBookingsController < ApplicationController
     def calculate_total_price(room,duration_id,number_of_guests)
         room_price = room.room_price
         total_days = Duration.find(duration_id.to_i).number_of_days
-        debugger
+        # debugger
         total_price = (room_price) * number_of_guests * total_days
         total_price
     end
     def booking_params
-        params.require(:room_booking).permit(:available_room_id,:duration_id,:start_date,:number_of_guests,:number_of_rooms)
+        params.require(:booking).permit(:available_room_id,:duration_id,:start_date,:number_of_guests,:number_of_rooms)
     end
 end

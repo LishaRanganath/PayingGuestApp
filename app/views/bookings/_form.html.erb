@@ -3,7 +3,7 @@
 
   </head>
   <body>
-    <%= form_with(model: RoomBooking.new, url:  room_bookings_path, id: 'booking-form',method: :post) do |form| %>   
+    <%= form_with(model: Booking, url:  bookings_path, id: 'booking-form',method: :post) do |form| %>   
       <%= form.label :start_date, "Select Date", id: 'label' %><br />
       <%= form.date_field :start_date, min: Date.today, max: 2.month.from_now.to_date, id: 'date-select',class: 'form-field'  %><br />
       <br />
@@ -16,7 +16,7 @@
 
       <br />
       <%= form.label :number_of_rooms, "Total rooms", id: 'label' %><br />
-      <%= form.number_field :number_of_rooms, value: 0, step: 1, id: 'number-of-rooms',class: "form-field"  %><br />
+      <%= form.number_field :number_of_rooms, value: 1, step: 1, id: 'number-of-rooms',class: "form-field"  %><br />
 
      <div id="price_field">
      Price:

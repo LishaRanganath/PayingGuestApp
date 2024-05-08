@@ -11,6 +11,9 @@
     <div class="link_actions">
         <ul class="navbar-nav">
             <%if current_user %>
+            <li class="nav-item">       
+                    <%=button_to 'Any Complaints?', destroy_user_session_path	, class: "nav-link", style:"font-size: 20px"%>
+                </li>
                 <li class="nav-item">       
                     <%=button_to 'SignOut', destroy_user_session_path	, class: "nav-link",method: :delete, style:"font-size: 20px"%>
                 </li> 
