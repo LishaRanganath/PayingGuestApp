@@ -16,14 +16,7 @@
                 <%= render partial: "customer"%>
             <%end%>
         <%else%>
-            <div id="search-form">
-                <%= form_with url: search_buildings_path do |f| %>
-                    <%= f.label :Search %>
-                    <%= f.text_field :Search ,id:"search", class: 'form-field'%>
-                    <%= f.submit "Submit" ,id:"submit-btn", class: 'btn'%>
-                <% end %>
-            </div>
-            <div id="filter-form">
+        <div id="filter-form">
                 <%= form_with url: filter_buildings_path do |f| %>
                     <%= f.select :query, options_for_select([['A-Z', 'asc'], ['Z-A', 'desc'], ['Location', 'loc']]), { prompt: 'Select One' }, id: 'filter-select', class: 'form-field' %>
                     <%= f.select :room_query, options_for_select([['Sinle-Sharing', 'Single'], ['Double-Sharing', 'Double'], ['Triple-Sharing', 'Triple']]), { prompt: 'Select Room Type' }, id: 'room-select', class: 'form-field' %>
@@ -31,6 +24,14 @@
                     <%= f.submit "Filter" ,id:"filter-btn", class: 'btn'%>
                 <% end %>
             </div>
+            <div id="search-form">
+                <%= form_with url: search_buildings_path do |f| %>
+                    <%= f.label :Search %>
+                    <%= f.text_field :Search ,id:"search", class: 'form-field'%>
+                    <%= f.submit "Submit" ,id:"submit-btn", class: 'btn'%>
+                <% end %>
+            </div>
+            
             <div class="grid-container"  style="width: 100%" id="result-div" >
                      <%@pg_buildings.each do |building|%>
                         <%if building.owner.status == "active"%>

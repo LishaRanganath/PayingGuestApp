@@ -33,20 +33,5 @@ module PgBuildingHelper
         end.join.html_safe
     end
 
-    def render_available_rooms(room_types)
-        room_types.flat_map do |room_type|
-          room_type.available_rooms.map do |room|
-            content_tag(:tr) do
-              concat content_tag(:td, room.room_type.name)
-              concat content_tag(:td, room.category.name)
-              concat content_tag(:td, room.availability)
-              concat content_tag(:td, room.room_price)
-              if current_user && current_user.owner
-              concat content_tag(:td, button_to('Update', root_path, class: 'btn links'))
-              concat content_tag(:td, button_to('Delete', available_room_path(id: room.id, pg_building_id: room.room_type.pg_building.id), class: 'btn', method: :delete))
-              end
-            end
-          end
-        end.join.html_safe
-      end
+   
 end

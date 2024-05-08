@@ -1,40 +1,15 @@
 <html>
   <head>
-    <style>
-        .form-field{
-          width:300px;
-        }
-        #room-type-select{
-          width: 300px;
-        }
-        #category-select{
-          width: 300px;
-        }
-        #label{
-          float:left;
-          font-size:20px;
-          padding-left:10%;
 
-        }
-    </style>
   </head>
   <body>
-    <%= form_with(model: RoomBooking.new, url:  room_bookings_path, id: 'booking-form',method: :post) do |form| %>
-      <%= form.label :room_type_id, "Select Room Type", id: 'label'%><br />
-      <%= form.select :room_type_id, options_from_collection_for_select(pg_building.room_types, 'id', 'name'), { prompt: 'Select Room Type' }, id: 'room-type-select',class: 'form-field'  %><br />
-
-      <br />
-      <%= form.label :category_id, "Select Room Category", id: 'label' %><br />
-      <%= form.select :category_id, options_from_collection_for_select(pg_building.categories, 'id', 'name'), { prompt: 'Select Category' }, id: 'category-select',class: 'form-field'  %><br />
-      
-      <br />
+    <%= form_with(model: RoomBooking.new, url:  room_bookings_path, id: 'booking-form',method: :post) do |form| %>   
       <%= form.label :start_date, "Select Date", id: 'label' %><br />
       <%= form.date_field :start_date, min: Date.today, max: 2.month.from_now.to_date, id: 'date-select',class: 'form-field'  %><br />
-
       <br />
       <%= form.label :duration_id, "Select Duration", id: 'label' %><br />
       <%= form.select :duration_id, options_from_collection_for_select(Duration.all, 'id', 'name'), { prompt: 'Select Duration' }, id: 'duration-select',class: "form-field"  %><br />
-      
+      <%= form.hidden_field :available_room_id, value: room.id, id: 'room-id' %>
       <br />
       <%= form.label :number_of_guests, "Number Of Guests", id: 'label' %><br />
       <%= form.number_field :number_of_guests, value: 1, step: 1, id: 'number-of-guests',class: "form-field"  %><br />
@@ -46,65 +21,48 @@
      <div id="price_field">
      Price:
      </div>
-      <%= form.submit "Submit" %>
+      <%= form.submit "Book" %>
     <% end %>
   </body>
-  <%
-=begin%>
- <script>
-  $(document).ready(function() {
-    var today = new Date();
-    var maxDate = new Date();
-    maxDate.setMonth(maxDate.getMonth() + 1); // Set max date 1 month ahead
-
-    $('#date-select').attr('max', formatDate(maxDate));
-    $('#date-select').attr('min', formatDate(today));
-  });
-
-  function formatDate(date) {
-    var dd = String(date.getDate()).padStart(2, '0');
-    var mm = String(date.getMonth() + 1).padStart(2, '0');
-    var yyyy = date.getFullYear();
-
-    return yyyy + '-' + mm + '-' + dd;
-  }
-</script> 
-<%
-=end%>
+  
 <script>
   $(document).ready(function() {
-  $('#booking-form').on('change', function() {
-    // Get the form data
-    var roomTypeId = $('#room-type-select').val();
-    var categoryId = $('#category-select').val();
-    var durationId = $('#duration-select').val();
-    var numberOfGuests = $('#number-of-guests').val();
-    var numberOfRooms = $('#number-of-rooms').val();
-
-    // Send an AJAX request to calculate the price
-    $.ajax({
-      type: 'POST',
-      url: '/calculate_price', // Update this with your route
-     data: {
-            room_type_id: roomTypeId,
-            category_id: categoryId,
+    $('#bookroomModal_<%= room.id %>').on('shown.bs.modal', function () {
+      // JavaScript code to be triggered after the modal is shown
+      console.log("Modal is shown");
+      
+      $(document).on('change', '#booking-form', function() {
+        // Get the form data
+         console.log("changed");
+        var roomId = $('#room-id').val();
+        var durationId = $('#duration-select').val();
+        var numberOfGuests = $('#number-of-guests').val();
+        var numberOfRooms = $('#number-of-rooms').val();
+        console.log(roomId);
+        $.ajax({
+          type: 'POST',
+          url: '/calculate_price', // Update this with your route
+          data: {
+            room_id: roomId,
             duration_id: durationId,
             number_of_guests: numberOfGuests,
             number_of_rooms: numberOfRooms
-        },
-      dataType: 'json',
-      success: function(response) {
-        // Update the price field with the calculated price
-        $('#price_field').text(response.price);
-      },
-      error: function(xhr, status, error) {
-        // Handle errors
-        console.error(xhr.responseText);
-      }
+          },
+          dataType: 'json',
+          success: function(response) {
+            // Update the price field with the calculated price
+            $('#price_field').text(response.price);
+          },
+          error: function(xhr, status, error) {
+            // Handle errors
+            console.error(xhr.responseText);
+          }
+        });
+      });
     });
   });
-});
 </script>
+
 
 
 </html>

@@ -1,0 +1,12 @@
+<%= form_with(url: payments_path) do |form| %>
+  <%= form.label :card_number %>
+  <%= form.text_field :card_number %>
+
+  <%= form.label :expiry_date %>
+  <%= form.date_field :expiry_date %>
+
+  <%= form.label :cvc %>
+  <%= form.password_field :cvc %>
+
+  <%= form.submit "Pay" %>
+<% end %>

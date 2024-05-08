@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   # end
   resources :room_types
   resources :categories
+
+  resources :payments, only: [:new, :create]
   # get "pg_building/:id",to:"pg_building#index"
   # get "/owner/pg", to:"pg_building#index"
   # get 'owner'

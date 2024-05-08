@@ -4,6 +4,7 @@
 
     </head>
     <body>
+    
         <% if is_owner?%>
             <%= render partial: "modal", locals: {pg_building: pg_building}%>
             <div class="main_container">
@@ -55,7 +56,16 @@
                             <th>Price(per night)</th>
                             <th colspan="2" style="text-align:center;">Action</th>
                         </tr>    
-                        <%= render_available_rooms(pg_building.room_types) %>
+                       <% pg_building.room_types.each do |room_type|%>
+                                <% room_type.available_rooms.each do |room|%>
+                                    <tr>
+                                        <td><%= room.room_type.name%></td>
+                                        <td><%= room.category.name%></td>
+                                        <td><%= room.availability%></td>
+                                        <td><%= room.room_price%></td>
+                                    </tr>
+                                <%end%>
+                            <%end%>
 
                     </table>
                 </div>
@@ -86,9 +96,20 @@
                                 <th>Category</th>
                                 <th>Availability</th>
                                 <th>Price(per Night)</th>
-
+                                <th>Action</th>
                             </tr>    
-                            <%= render_available_rooms(pg_building.room_types) %>
+                            <% pg_building.room_types.each do |room_type|%>
+                                <% room_type.available_rooms.each do |room|%>
+                                    <tr>
+                                        <td><%= room.room_type.name%></td>
+                                        <td><%= room.category.name%></td>
+                                        <td><%= room.availability%></td>
+                                        <td><%= room.room_price%></td>
+                                        <td><button type="button" id="book_room" class="btn" data-bs-toggle="modal" data-bs-target="#bookroomModal_<%= room.id %>">Book</button></td>
+                                        <%= render partial: "modal", locals: {pg_building: pg_building, room: room}%>
+                                    </tr>
+                                <%end%>
+                            <%end%>
                         </table>
                         <br />
                         <br />
@@ -105,12 +126,7 @@
                         </div>
                     </div>
             
-                    <div class="line"></div>
-                    <div class="payment_container">
-                        <h4>Choose your Requirement:</h4>
-                        <%=render partial:"room_bookings/form",locals: {pg_building: pg_building}%>
-                    </div>
-                </div>
+                    
                 <br />
                 <br />
        

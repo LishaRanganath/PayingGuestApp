@@ -18,30 +18,17 @@ p {
 }
 .main_container .data {
   display: flex;
+  
 }
 .main_container .table-data {
   text-align: left;
-  width: 50%;
+  width: 80%;
   height: 20%;
-}
-.main_container .payment_container {
-  border: 2px solid rgba(87, 86, 86, 0.529);
-  width: 35%;
-  text-align: center;
-  margin-left: 12%;
-  border-radius: 7px;
 }
 #price-calculation-form {
   padding-right: 25%;
 }
-#room-type-select {
-  width: 60%;
-  font-size: 18px;
-}
-#category-select {
-  width: 60%;
-  font-size: 18px;
-}
+
 .form_container p {
   padding-right: 40%;
 }

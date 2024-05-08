@@ -34,3 +34,13 @@ $('#add_availability').on('click', function(){
         AddOwnerInput.focus();
     });
 });
+
+$('#book_room').on('click', function(){
+    const BookRoom = document.getElementById('book_room');
+    const myModal = document.getElementById('bookroomModal');
+    
+
+    myModal.addEventListener('shown.bs.modal', () => {
+        AddOwnerInput.focus();
+    });
+});
