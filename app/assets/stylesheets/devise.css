@@ -1,4 +1,58 @@
-.register_container {
+.main_registeration_container{
   border: 1px solid rgba(108, 106, 106, 0.815);
-  padding: 2% 2% 2% 2%;
+  padding: 1.5% 1.5% 1.5% 1.5%;
+  height: 100%;
+  width: 30%;
+  margin-left: 35%;
+  box-shadow: 0 0 20px rgba(42, 42, 42, 0.8);
+  margin-top: 3%;
+  font-size: 20px;
+
+}
+.text_fields{
+  width: 500px;
+  height: 50px;
+}
+h2{
+  display:flex; 
+  justify-content:center;
+  align-items: center;
+  background-color: rgba(201, 195, 195, 0.873);
+  height: 60px;
+}
+.login-btn{
+  background-color: #00b8e6;
+  width: 500px;
+  height: 50px;
+  font-size: 29px;
+}
+.login-actions{
+  display: flex;
+  justify-content: center;  
+}
+.check_box_style{
+  width: 30px;
+  height: 30px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+}
+#check_box_id{
+  display: flex;
+  align-items: center;
+}
+.links{
+  text-decoration: none;
+  color: black;
+  display: block;
+  font-size: 22px;
+}
+.navbar{
+  height:80px;
+  background-color:white;
+  padding:0% 20% 0% 20%;
+  box-shadow: 0 0 20px rgba(42, 42, 42, 0.4);
+  width: 98%;
+  margin-left: 1%;
+  margin-top: 1%;
+  border-radius: 6px;
 }

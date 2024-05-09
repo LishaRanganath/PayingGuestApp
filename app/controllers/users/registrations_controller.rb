@@ -1,27 +1,18 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only: [:create]
+  # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    super
-    # @user = User.new
-    # @user.build_customer
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource
-  def create
-    super
-    # @user = User.new(user_params)
-
-    # if @user.save
-    #   redirect_to root_path
-    # else
-    #   render :new
-    # end
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -49,23 +40,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # protected
 
-  # def after_sign_up_path_for(resource)
-  #   return_to_pg_building = session.delete(:return_to_pg_building)
-  #   return_to_pg_building || root_path
+  # If you have extra params to permit, append them to the sanitizer.
+  # def configure_sign_up_params
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
   # end
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sanitized_params
-  #   devise_parameter_sanitized.for(:sign_up) do |u|
-  #     u.permit(:email,:password,:password_confirmation,customer_attributes:[:name,:phone])
-  #   end
-  # end
-  protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone])
-  end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
@@ -79,11 +58,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
-  # end
-
-  # private
-
-  # def user_params
-  #   params.require(:user).permit(:email, :password, :password_confirmation, customer_attributes: [:name, :phone])
   # end
 end

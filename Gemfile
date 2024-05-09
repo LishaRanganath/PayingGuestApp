@@ -72,3 +72,6 @@ gem 'devise'
 gem 'nested_form'
 gem 'activemerchant'
 gem 'noticed', '~> 1.6', '>= 1.6.3'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection', "~>1.0"
