@@ -1,14 +1,17 @@
-<% @bookings.each do |booking| %>
-  <div>
-    <%= booking.id %>
-    <%= booking.start_date %>
-    <%= booking.duration.name %>
-    <%= booking.total_price %>
-    <button type="button" id="complaints" class="btn" data-bs-toggle="modal" data-bs-target="#complaintsModal">Feedback</button>
-   <%= render partial: "complaints_form", locals: { booking: booking } %>
-  </div>
-<% end %>
-
+<% if current_user && current_user.role== "user"%>
+  <% @bookings.each do |booking| %>
+    <div>
+      <%= booking.id %>
+      <%= booking.start_date %>
+      <%= booking.duration.name %>
+      <%= booking.total_price %>
+      <button type="button" id="complaints" class="btn" data-bs-toggle="modal" data-bs-target="#complaintsModal">Feedback</button>
+    <%= render partial: "complaints_form", locals: { booking: booking } %>
+    </div>
+  <% end %>
+<%else%>
+  <%= render partial: "complaints", locals:{buildings: @pg_buildings}%>
+<%end%>
 <script>
     $('#complaints').on('click', function(){
     const Compalints = document.getElementById('complaints');

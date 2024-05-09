@@ -4,6 +4,7 @@ class PgBuilding < ApplicationRecord
 
     has_many :room_types
     has_many :categories
+    has_many :available_rooms
     
     validates :name,presence: true
     validates :address,presence: true

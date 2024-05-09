@@ -9,7 +9,9 @@ class AvailableRoomsController < ApplicationController
         category_type = Category.find_by(id: category_type)
         category_price = category_type.price
         room_price = room_type_price + category_price
-        available_room = AvailableRoom.create(room_params.merge(room_price: room_price))
+        
+        available_room = AvailableRoom.new(room_params.merge(room_price: room_price , pg_building_id: room_params[:pg_building_id]))
+        debugger
         if available_room.save
             redirect_to pg_building_path(id: room_type.pg_building.id), notice: "Updated Room Availability"
         else
@@ -32,6 +34,6 @@ class AvailableRoomsController < ApplicationController
     private
 
     def room_params
-        params.require(:available_room).permit(:room_type_id, :category_id,:availability)
+        params.require(:available_room).permit(:room_type_id, :category_id,:availability,:pg_building_id)
     end
 end

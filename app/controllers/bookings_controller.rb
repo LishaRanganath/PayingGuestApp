@@ -7,18 +7,22 @@ class BookingsController < ApplicationController
     def show
         # debugger
         @bookings = Booking.where(user_id: params[:id])
+        if current_user && current_user.owner
+            @pg_buildings = current_user.owner.pg_buildings
+            
+        end
     end
 
     def complaints
-        @booking = Booking.find_by(id: params[:id])
-        debugger
-        if @booking.update(complaints: booking_params[:complaints])
-
-            @booking.notify_owner_of_complaint
-            redirect_to root_path, notice: "Feedback sent successfully"
-        else
-            redirect_to root_path, notice: "Failed to send feedback"
-        end
+            @booking = Booking.find_by(id: params[:id])
+            
+            if @booking.update(complaints: booking_params[:complaints])
+                debugger
+                # @booking.notify_owner_of_complaint
+                redirect_to root_path, notice: "Feedback sent successfully"
+            else
+                redirect_to root_path, notice: "Failed to send feedback"
+            end
     end
     def create
         # debugger

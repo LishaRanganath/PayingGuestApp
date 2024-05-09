@@ -1,0 +1,7 @@
+<% buildings.each do |building|%>
+    <% building.available_rooms.each do |room|%>
+        <% room.bookings.each do |booking|%>
+            <%= booking.complaints%>
+        <%end%>
+    <%end%>
+<%end%>
