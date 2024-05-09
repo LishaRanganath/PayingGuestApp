@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_08_111646) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_09_122155) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -128,6 +128,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_111646) do
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "uid"
+    t.string "avatar_url"
+    t.string "provider"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -144,6 +147,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_111646) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admins", "users"
   add_foreign_key "available_rooms", "categories"
+  add_foreign_key "available_rooms", "pg_buildings"
   add_foreign_key "available_rooms", "room_types"
   add_foreign_key "bookings", "available_rooms"
   add_foreign_key "bookings", "durations"

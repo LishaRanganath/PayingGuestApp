@@ -1,7 +1,9 @@
 class OwnersController < ApplicationController
-  # before_action :check_if_admin
+  before_action :check_if_admin
   def index
     @owner_all = Owner.all
+    @deactive_owners = Owner.where(status: "deactive")
+    @active_owners = Owner.where(status: "active")
   end
   def new
     @owner = Owner.new
@@ -10,10 +12,9 @@ class OwnersController < ApplicationController
 
 
   def create
-    @owner = Owner.new(owner_params)
-    @owner.admin_id = current_user.admin.id
-    if @owner.save
-      @owner.user.update(role: 'owner')
+    owner = Owner::OwnerCreator.new(owner_params, admin_id: current_user.admin.id).create
+    if owner.save
+      owner.user.update(role: 'owner')
       redirect_to root_path, notice: "Owner and user successfully created."
     else
       flash.now[:alert] = @owner.errors.full_messages.join(", ")
@@ -21,7 +22,7 @@ class OwnersController < ApplicationController
   end
 
   def edit
-    @owner=Owner.find_by(id: params[:id])
+    @owner = get_owner(id: params[:id])
   end
 
   def update
@@ -34,7 +35,7 @@ class OwnersController < ApplicationController
   end
 
   def destroy
-    owner = Owner.find_by(id: params[:id])
+    owner = get_owner(id: params[:id])
     if owner.destroy
       redirect_to root_path, notice: "Owner deleted sucessfully"
     else
@@ -43,7 +44,7 @@ class OwnersController < ApplicationController
   end
 
   def activate
-    @owner_activate = Owner.find_by(id: params[:id])
+    @owner_activate = get_owner(id: params[:id])
     @owner_activate.update(status: "active")
     if @owner_activate.save
       redirect_to owners_path , notice: "Status sucessfully updated"
@@ -53,7 +54,7 @@ class OwnersController < ApplicationController
   end
 
   def deactivate
-    @owner_deactivate = Owner.find_by(id: params[:id])
+    @owner_deactivate = get_owner(id: params[:id])
     @owner_deactivate.update(status: @owner_deactivate.status="deactive")
     if @owner_deactivate.save
       redirect_to owners_path , notice: "Status sucessfully updated"
@@ -68,6 +69,11 @@ class OwnersController < ApplicationController
     if current_user.role == "admin"
        puts "you are admin"
     end
+  end
+
+  def get_owner(owner_id)
+    owner = Owner.find_by(id: owner_id)
+    owner
   end
 
   def owner_params

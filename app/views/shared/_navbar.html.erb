@@ -17,6 +17,7 @@
                         <%=link_to 'Your-Bookings',booking_path(id: current_user.id), method: :get, class: "nav-link", style:"font-size: 20px"%>
                     </li>
                 <% elsif current_user.owner %>
+                   
                     <li class="nav-item">       
                         <%=link_to 'Compalints',booking_path(id: current_user.owner.id), method: :get, class: "nav-link", style:"font-size: 20px"%>
                     </li>
