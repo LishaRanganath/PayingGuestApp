@@ -1,0 +1,7 @@
+<% @complaints.each do |booking| %>
+  <div>
+    <strong>Booking ID:</strong> <%= booking.id %><br>
+    <strong>Start Date:</strong> <%= booking.start_date %><br>
+    <strong>Complaints:</strong> <%= booking.complaints %>
+  </div>
+<% end %>

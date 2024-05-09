@@ -17,7 +17,11 @@ Rails.application.routes.draw do
   get 'search_buildings', to: 'pg_buildings#search', as: 'search_buildings'
   get 'filter_buildings', to: 'pg_buildings#filter', as: 'filter_buildings'
   resources :available_rooms
-  resources :bookings
+  resources :bookings do
+        member do
+            put 'complaints'
+        end
+  end
   post '/calculate_price', to: 'bookings#calculate_price'
     # member do
     #   post 'calculate_price'

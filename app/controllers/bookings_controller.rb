@@ -1,5 +1,25 @@
 class BookingsController < ApplicationController
     skip_before_action :verify_authenticity_token
+    def index
+        @complaints = Booking.where.not(complaints: nil)
+    end
+
+    def show
+        # debugger
+        @bookings = Booking.where(user_id: params[:id])
+    end
+
+    def complaints
+        @booking = Booking.find_by(id: params[:id])
+        debugger
+        if @booking.update(complaints: booking_params[:complaints])
+
+            @booking.notify_owner_of_complaint
+            redirect_to root_path, notice: "Feedback sent successfully"
+        else
+            redirect_to root_path, notice: "Failed to send feedback"
+        end
+    end
     def create
         # debugger
         if current_user && current_user.role == "user"
@@ -53,6 +73,6 @@ class BookingsController < ApplicationController
         total_price
     end
     def booking_params
-        params.require(:booking).permit(:available_room_id,:duration_id,:start_date,:number_of_guests,:number_of_rooms)
+        params.require(:booking).permit(:available_room_id,:duration_id,:start_date,:number_of_guests,:number_of_rooms,:complaints)
     end
 end

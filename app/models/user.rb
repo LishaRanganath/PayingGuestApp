@@ -15,8 +15,5 @@ class User < ApplicationRecord
     self.role||=:user
   end
 
-  def with_customer
-    build_customer if customer.nil?
-    self
-  end
+
 end
