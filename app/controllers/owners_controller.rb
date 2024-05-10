@@ -12,9 +12,8 @@ class OwnersController < ApplicationController
 
 
   def create
-    owner = Owner::OwnerCreator.new(owner_params, admin_id: current_user.admin.id).create
-    if owner.save
-      owner.user.update(role: 'owner')
+    owner = OwnersManager::OwnerCreator.new(owner_params, admin_id: current_user.admin.id).create
+    if owner
       redirect_to root_path, notice: "Owner and user successfully created."
     else
       flash.now[:alert] = @owner.errors.full_messages.join(", ")
@@ -35,8 +34,9 @@ class OwnersController < ApplicationController
   end
 
   def destroy
-    owner = get_owner(id: params[:id])
-    if owner.destroy
+    owner = get_owner(params[:id])
+    user_as_owner = User.find_by(id: owner.user.id)
+    if owner.destroy && user_as_owner.destroy
       redirect_to root_path, notice: "Owner deleted sucessfully"
     else
       redirect_to root_path, alert: "Owner was not deleted"
