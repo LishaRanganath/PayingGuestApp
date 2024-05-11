@@ -1,21 +1,12 @@
 class AvailableRoomsController < ApplicationController
-
-    
     def create
-        room_type = room_params[:room_type_id]
-        room_type = RoomType.find_by(id: room_type)
-        room_type_price=room_type.price
-        category_type = room_params[:category_id]
-        category_type = Category.find_by(id: category_type)
-        category_price = category_type.price
-        room_price = room_type_price + category_price
-        
-        available_room = AvailableRoom.new(room_params.merge(room_price: room_price , pg_building_id: room_params[:pg_building_id]))
+        room_price = RoomsManager::RoomPriceCalculator.calculate_price(room_params[:room_type_id], room_params[:category_id])
+        room= AvailableRoom.new(room_params.merge(room_price: room_price , pg_building_id: room_params[:pg_building_id]))
         # debugger
-        if available_room.save
-            redirect_to pg_building_path(id: room_type.pg_building.id), notice: "Updated Room Availability"
+        if room.save
+            redirect_to pg_building_path(id: room.pg_building.id), notice: "Updated Room Availability"
         else
-            redirect_to pg_building_path(id: room_type.pg_building.id), notice: "Could Not Update Room Availability"
+            redirect_to pg_building_path(id: room.pg_building.id), notice: "Could Not Update Room Availability"
         end
     end
 
