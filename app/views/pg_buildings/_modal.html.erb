@@ -8,7 +8,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body"> 
-        <%= render partial: "room_types/form" %>
+        <%= render partial: "room_types/form",locals: {pg_building: pg_building} %>
       </div>
     </div>
   </div> 
@@ -41,7 +41,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body"> 
-        <%= render partial: "categories/form" %>
+        <%= render partial: "categories/form",locals: {pg_building: pg_building}  %>
       </div>
     </div>
   </div> 

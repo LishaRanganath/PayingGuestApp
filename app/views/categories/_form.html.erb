@@ -6,6 +6,8 @@
           <%= form.label :name, "Room Category" %><br>
           <%= form.text_field :name %>
         </div>
+        <%= form.hidden_field :pg_building_id, value: pg_building.id %>
+
         <div class="field">
           <%= form.label :price, "Cost" %><br>
           <%= form.text_field :price %>

@@ -12,25 +12,30 @@ class OwnersController < ApplicationController
 
 
   def create
-    owner = OwnersManager::OwnerCreator.new(owner_params, admin_id: current_user.admin.id).create
-    if owner
-      redirect_to root_path, notice: "Owner and user successfully created."
+    owner = Owner.new(owner_params)
+    # debugger
+    if owner.save
+      owner.user.update(role: 'owner')
+      redirect_to root_path, notice: "Owner Successfully Added."
     else
-      flash.now[:alert] = @owner.errors.full_messages.join(", ")
+      redirect_to root_path, notice: "Could not add Owner"
     end
   end
 
   def edit
-    @owner = get_owner(id: params[:id])
+    @owner = get_owner(params[:id])
+    # debugger
   end
 
   def update
     @owner = Owner.find(params[:id])
-    if @owner.update(owner_params)
-      puts"=================================="
-      flash[:success] = "Owner updated successfully"
-      redirect_to owners_path
+    # debugger
+    if @owner.update(update_owner_params)
+      redirect_to root_path, notice: "Owner updated sucessfully"
+    else
+      redirect_to root_path, notice: "Could not update Onwer, Try Again!!"
     end
+    # debugger
   end
 
   def destroy
@@ -39,14 +44,13 @@ class OwnersController < ApplicationController
     if owner.destroy && user_as_owner.destroy
       redirect_to root_path, notice: "Owner deleted sucessfully"
     else
-      redirect_to root_path, alert: "Owner was not deleted"
+      redirect_to root_path, alert: "Owner was not deleted, Try Again!!"
     end
   end
 
   def activate
-    @owner_activate = get_owner(id: params[:id])
-    @owner_activate.update(status: "active")
-    if @owner_activate.save
+    activate_owner = get_owner(params[:id]).update(status: "active")
+    if activate_owner
       redirect_to owners_path , notice: "Status sucessfully updated"
     else
       redirect_to owners_path , notice: "Status was not updated"
@@ -54,14 +58,15 @@ class OwnersController < ApplicationController
   end
 
   def deactivate
-    @owner_deactivate = get_owner(id: params[:id])
-    @owner_deactivate.update(status: @owner_deactivate.status="deactive")
-    if @owner_deactivate.save
+    deactivate_owner = get_owner(params[:id]).update(status: "deactive")
+    if deactivate_owner
       redirect_to owners_path , notice: "Status sucessfully updated"
     else
       redirect_to owners_path , alert: "Status was not updated"
     end
   end
+
+
 
   private
 
@@ -76,6 +81,9 @@ class OwnersController < ApplicationController
     owner
   end
 
+  def update_owner_params
+    params.require(:owner).permit(:name, :phone,:admin_id)
+  end
   def owner_params
     params.require(:owner).permit(:name, :phone,:admin_id, user_attributes: [:email, :password,:role])
   end

@@ -5,6 +5,8 @@ class Booking < ApplicationRecord
 
 
   # private
-
+  def has_complaint?
+    !complaints.blank? # Assuming complaints is the attribute where you store the complaint
+  end
  
 end

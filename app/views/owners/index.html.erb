@@ -3,7 +3,8 @@
         <%= stylesheet_link_tag 'owner', media: 'all', 'data-turbolinks-track': 'reload' %>
     </head>
     <body>
-        <div class="cont">
+        <% if current_user && current_user.admin%>
+            <div class="cont">
             <table class="table table-striped">
                 <tr>
                     <th>Name</th>
@@ -17,19 +18,20 @@
                         <td><%= owner.phone%></td>
                         <td><%= owner.status%></td>
                         <%if owner.status=="deactive"%>
-                            <td><button type="button" class="btn" id="activate_button"><%= link_to 'Activate',activate_owner_path(owner),class: 'links'%></button></td>
-                            <td><button type="button" class="btn disabled"><%= link_to 'Deactivate ','#',class: 'links',:html => {:disabled => true} %></button></td>     
+                            <td><button type="button" class="btn" id="activate_button"><%= link_to 'Activate',activate_owner_path(owner),class: 'action-links'%></button></td>
+                            <td><button type="button" class="btn disabled"><%= link_to 'Deactivate ','#',class: 'action-links',:html => {:disabled => true} %></button></td>     
                         <%else%>
-                            <td><button type="button" class="btn disabled"><%= link_to 'Activate','#',class: 'links',:html => {:disabled => true} %></button></td>     
-                            <td><button type="button" class="btn" id="deactivate_button"><%= link_to 'Deactivate',deactivate_owner_path(owner),class: 'links'%></button></td>
+                            <td><button type="button" class="btn disabled"><%= link_to 'Activate','#',class: 'action-links',:html => {:disabled => true} %></button></td>     
+                            <td><button type="button" class="btn" id="deactivate_button"><%= link_to 'Deactivate',deactivate_owner_path(owner),class: 'action-links'%></button></td>
                         <%end%>
-                        <td><button type="button" class="btn"><%= link_to 'View PGs', list_pg_building_path(owner.id),class: 'links'%></button></td>
-                        <td><button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editModal_<%= owner.id %>">Edit Owner</button></td>
+                        <td><button type="button" class="btn"><%= link_to 'View PGs', list_pg_building_path(owner.id),class: 'action-links'%></button></td>
+                        <td><button type="button" class="btn"><%= link_to 'Edit Owner', edit_owner_path(owner.id), class: 'action-links' %></button></td>     
                         <td><%= button_to 'Delete', owner_path(owner.id), method: :delete, data: { confirm: 'Are you sure?' },class:"btn" %></td>
                     </tr>
                     
                 <% end %>
             </table>
         </div>
+        <%end%>
     </body>
 </html>

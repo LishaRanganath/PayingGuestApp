@@ -1,25 +1,30 @@
+<%= stylesheet_link_tag 'bookings', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <% if current_user && current_user.role== "user"%>
-  <% @bookings.each do |booking| %>
-    <div>
-      <%= booking.id %>
-      <%= booking.start_date %>
-      <%= booking.duration.name %>
-      <%= booking.total_price %>
-      <button type="button" id="complaints" class="btn" data-bs-toggle="modal" data-bs-target="#complaintsModal">Feedback</button>
-    <%= render partial: "complaints_form", locals: { booking: booking } %>
-    </div>
-  <% end %>
+   <table class="complaints-table">
+    <thead>
+      <tr>
+        <th>Booking-ID</th>
+        <th>Start Date</th>
+        <th>Duration</th>
+        <th>Total Price</th>
+        <th>Your Feedback</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.id %></td>
+          <td><%= booking.start_date %></td>
+          <td><%= booking.duration.name %></td>
+          <td><%= booking.total_price %></td>
+          <td>
+            <%= render partial: "complaints_form", locals: { booking: booking } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <%else%>
   <%= render partial: "complaints", locals:{buildings: @pg_buildings}%>
 <%end%>
-<script>
-    $('#complaints').on('click', function(){
-    const Compalints = document.getElementById('complaints');
-    const myModal = document.getElementById('complaintsModal');
-    
-
-    myModal.addEventListener('shown.bs.modal', () => {
-        AddOwnerInput.focus();
-    });
-});
-</script>

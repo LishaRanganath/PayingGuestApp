@@ -25,11 +25,15 @@ module HomeHelper
     def all_pg_buildings_owner(pg_buildings,current_user)
         all_buildings = []
 
-        pg_buildings.each do |building|
-            if building.owner_id == current_user.owner.id && current_user.owner.status == "active"
+        if current_user.owner.status != "active"
+            @error_message = "Your account is deactivated."
+          else
+            pg_buildings.each do |building|
+              if building.owner_id == current_user.owner.id
                 all_buildings << building
+              end
             end
-        end
+          end
 
         all_buildings
     end

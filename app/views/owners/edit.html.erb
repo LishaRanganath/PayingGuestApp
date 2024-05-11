@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <style>
+      .form-container {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <%= form_for(@owner, url: owner_path(@owner.id), method: :patch) do |form| %>
+        <div class="field">
+          <%= form.label :name, "Owner Name" %><br>
+          <%= form.text_field :name, id: "name", value: form.object.name %>
+        </div>
+        <div class="field">
+          <%= form.label :phone, "Phone Number" %><br>
+          <%= form.text_field :phone, value: form.object.phone %>
+        </div>
+        <%= form.hidden_field :admin_id, value: current_user.admin.id %>
+
+        <%= form.submit "Submit" %>
+      <% end %>
+    </div>
+  </body>
+</html>

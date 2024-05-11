@@ -15,7 +15,7 @@ class User < ApplicationRecord
       end
     end
       
-
+  validates_uniqueness_of :email, case_sensitive: false, if: :email_changed?
   has_many :bookings, dependent: :destroy
 
   has_one :owner, dependent: :destroy

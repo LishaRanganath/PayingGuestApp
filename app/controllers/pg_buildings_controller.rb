@@ -26,17 +26,10 @@ class PgBuildingsController < ApplicationController
     render partial: "home/search_results" ,locals:{resultant_buildings: @resultant_buildings}
   end
 
-  def list
-    owner=Owner.find_by(id: params[:id])
-    @owner_buildings=owner.pg_buildings
-  end
+
 
   # To display all the PGs that are owned by the Owner
   def show
-    if current_user && current_user.owner?
-      owner=Owner.find_by(id: current_user.owner.id)
-      @pg_buildings=owner.pg_buildings
-    end
     @pg_building=PgBuilding.find_by(id: params[:id])
   end
 

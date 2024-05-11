@@ -1,8 +1,6 @@
 <%= form_with(model: booking,url: complaints_booking_path(booking.id), method: :put) do |form| %>
-    <%= booking.id%>
-    <div class="field">
-    <%= form.label :complaints, "Feedback:" ,style: "text-align: left;"%><br>
-    <%= form.text_field :complaints %>
-    </div>
-    <%= form.submit "Submit" %>
+    <div style="display: flex; align-items: center;">
+  <%= form.text_field :complaints, style: "margin-right: 10px;" %>
+  <%= form.submit "Submit" %>
+</div>
 <%end%>

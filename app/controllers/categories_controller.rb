@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
     def create
-        building =PgBuilding.find_by(params[:id])
+        building =PgBuilding.find_by(id: category_params[:pg_building_id])
         category_type = building.categories.create(category_params)
         if category_type.save
             redirect_to pg_building_path(id: building.id), notice: "The room category was created sucessfully"
@@ -36,7 +36,7 @@ class CategoriesController < ApplicationController
     private
 
     def category_params
-        params.require(:category).permit(:name,:price)
+        params.require(:category).permit(:name,:price, :pg_building_id)
     end
 
 end

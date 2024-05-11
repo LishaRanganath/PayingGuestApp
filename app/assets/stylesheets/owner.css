@@ -46,8 +46,9 @@ table td {
   opacity: 0.5; /* Reduce opacity for disabled buttons */
   cursor: not-allowed; /* Change cursor to not-allowed for disabled buttons */
 }
-.btn .links{
+.btn .action-links{
   color:black;
   text-decoration: none;  
-  padding-left: 25%;
+  /* padding-left: 25%; */
+  font-size: 20px;
 }

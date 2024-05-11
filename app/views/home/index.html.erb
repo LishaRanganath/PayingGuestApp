@@ -10,7 +10,11 @@
                 <%= render partial: "admin"%>
                 
             <%elsif owner_log_in? %>
-                <%= render partial: "owner"%>
+                <% if current_user.owner.status == "active"%>
+                    <%= render partial: "owner"%>
+                <% else %>
+                    <h1 class="error-message">Sorry Your account is not active. Contact Admin!.</h1>
+                <%end%>
 
             <%else%>
                 <%= render partial: "customer"%>

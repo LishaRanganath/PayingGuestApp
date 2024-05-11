@@ -1,6 +1,8 @@
 class RoomTypesController < ApplicationController
     def create
-        building =PgBuilding.find_by(params[:id])
+        
+        building =PgBuilding.find_by(id: room_params[:pg_building_id])
+        debugger
         room_type = building.room_types.create(room_params)
         if room_type.save
             redirect_to pg_building_path(id: building.id), notice: "The room type was created sucessfully"
@@ -36,7 +38,7 @@ class RoomTypesController < ApplicationController
     private
 
     def room_params
-        params.require(:room_type).permit(:name,:price)
+        params.require(:room_type).permit(:name,:price,:pg_building_id)
     end
 
 end

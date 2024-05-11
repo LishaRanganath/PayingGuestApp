@@ -15,13 +15,16 @@ class BookingsController < ApplicationController
 
     def complaints
             @booking = Booking.find_by(id: params[:id])
-            
-            if @booking.update(complaints: booking_params[:complaints])
-                debugger
-                # @booking.notify_owner_of_complaint
-                redirect_to root_path, notice: "Feedback sent successfully"
+            if @booking.has_complaint?
+                redirect_to root_path , notice: "You already Have raised a complaint"
             else
-                redirect_to root_path, notice: "Failed to send feedback"
+                if @booking.update(complaints: booking_params[:complaints])
+                    debugger
+                    # @booking.notify_owner_of_complaint
+                    redirect_to root_path, notice: "Feedback sent successfully"
+                else
+                    redirect_to root_path, notice: "Failed to send feedback"
+                end
             end
     end
     def create

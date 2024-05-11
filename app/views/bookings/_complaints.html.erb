@@ -1,7 +1,32 @@
-<% buildings.each do |building|%>
+ <%= stylesheet_link_tag 'bookings', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+ <table class = "complaints-table">
+    <thead>
+      <tr>
+        <th>Booking-ID</th>
+        <th>Start Date</th>
+        <th>Duration</th>
+        <th>Total Price</th>
+        <th>Feedback</th>
+        <th colspan="2">Action</th>
+      </tr>
+    </thead>   
+    <tbody>
+      <% buildings.each do |building|%>
     <% building.available_rooms.each do |room|%>
         <% room.bookings.each do |booking|%>
-            <%= booking.complaints%>
-        <%end%>
+        <tr>
+          <td><%= booking.id %></td>
+          <td><%= booking.start_date %></td>
+          <td><%= booking.duration.name %></td>
+          <td><%= booking.total_price %></td>
+          <td><%= booking.complaints%></td>
+          <td><button type="button" class="btn">Take Action</button></td>
+          <td><button type="button" class="btn">Approve</button></td>
+        </tr>
+     <%end%>
     <%end%>
 <%end%>
+    </tbody>
+  </table>
+        
