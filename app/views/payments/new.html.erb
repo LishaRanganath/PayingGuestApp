@@ -1,12 +1,42 @@
-<%= form_with(url: payments_path) do |form| %>
-  <%= form.label :card_number %>
-  <%= form.text_field :card_number %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payments</title>
+  <%= stylesheet_link_tag 'payments', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <!-- Add any additional stylesheets or styles here -->
+</head>
+<body>
+<h1 >Payment Details</h1>
+  <div class="container">
+    
+    <div class="payments-form">
+      <%= form_with url: payments_path, method: :post do |form| %>
+        <%= form.label :first_name, "First Name", class: 'form-label'%><br>
+        <%= form.text_field :first_name, class: 'form-field' %><br>
 
-  <%= form.label :expiry_date %>
-  <%= form.date_field :expiry_date %>
+        <%= form.label :last_name, "Last Name", class: 'form-label' %><br>
+        <%= form.text_field :last_name, class: 'form-field' %><br>
 
-  <%= form.label :cvc %>
-  <%= form.password_field :cvc %>
+        <%= form.label :card_number, 'Credit Card Number', class: 'form-label' %><br />
+        <%= form.text_field :card_number, class: 'form-field' %><br />
 
-  <%= form.submit "Pay" %>
-<% end %>
+        <%= form.hidden_field :booking_id, value: @booking.id %>
+        
+        <%= form.label :card_month, 'Expiration Month', class: 'form-label' %><br />
+        <%= form.text_field :card_month, class: 'form-field' %><br />
+
+        <%= form.label :card_year, 'Expiration Year', class: 'form-label' %><br />
+        <%= form.text_field :card_year, class: 'form-field' %><br />
+
+        <%= form.label :card_cvv, 'CVV', class: 'form-label' %><br />
+        <%= form.text_field :card_cvv, class: 'form-field' %><br />
+
+        <%= form.submit 'Submit Payment', class: 'btn-submit' %><br />
+        <br />
+      <% end %>
+    </div>
+  </div>
+</body>
+</html>

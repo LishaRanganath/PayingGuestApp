@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_122155) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_125546) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_122155) do
     t.bigint "available_room_id", null: false
     t.bigint "user_id", null: false
     t.text "complaints"
+    t.string "booking_status"
     t.index ["available_room_id"], name: "index_bookings_on_available_room_id"
     t.index ["duration_id"], name: "index_bookings_on_duration_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
@@ -102,6 +103,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_122155) do
     t.bigint "admin_id", null: false
     t.index ["admin_id"], name: "index_owners_on_admin_id"
     t.index ["user_id"], name: "index_owners_on_user_id"
+  end
+
+  create_table "payments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "card_number"
+    t.string "card_month"
+    t.string "card_year_string"
+    t.string "card_cvv"
+    t.bigint "booking_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_payments_on_booking_id"
   end
 
   create_table "pg_buildings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -155,6 +167,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_122155) do
   add_foreign_key "categories", "pg_buildings"
   add_foreign_key "owners", "admins"
   add_foreign_key "owners", "users"
+  add_foreign_key "payments", "bookings"
   add_foreign_key "pg_buildings", "owners"
   add_foreign_key "room_types", "pg_buildings"
 end

@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
 
     def show
         # debugger
-        @bookings = Booking.where(user_id: params[:id])
+        @bookings = Booking.where(user_id: params[:id],booking_status: "success")
         if current_user && current_user.owner
             @pg_buildings = current_user.owner.pg_buildings
             
@@ -19,7 +19,7 @@ class BookingsController < ApplicationController
                 redirect_to root_path , notice: "You already Have raised a complaint"
             else
                 if @booking.update(complaints: booking_params[:complaints])
-                    debugger
+                    # debugger
                     # @booking.notify_owner_of_complaint
                     redirect_to root_path, notice: "Feedback sent successfully"
                 else
@@ -41,13 +41,13 @@ class BookingsController < ApplicationController
               room_booking = Booking.new(
                 booking_params.merge(
                     total_price: price,
-                    user_id: current_user.id  # Set customer_id to current user's ID
+                    user_id: current_user.id,
+                    booking_status: "pending"
                     )
                 )
                 # debugger
                 if room_booking.save
-                    room.update(availability: room.availability - number_of_rooms)
-                    redirect_to root_path, notice: "Room booked successfully"
+                    redirect_to new_payment_path(booking_id: room_booking.id), notice: "Please Complete The Payment to Boom the Room."
                 end
             else
                 redirect_to root_path, notice: "Room is not available"
