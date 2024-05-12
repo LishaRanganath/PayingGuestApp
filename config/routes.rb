@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       get 'list'
     end
   end
-  get 'payments/download_invoice', to: 'payments#download_invoice'
+  get 'payments/:id/download_invoice', to: 'payments#download_invoice', as: 'download_invoice'
   get 'search_buildings', to: 'pg_buildings#search', as: 'search_buildings'
   get 'filter_buildings', to: 'pg_buildings#filter', as: 'filter_buildings'
   resources :available_rooms
