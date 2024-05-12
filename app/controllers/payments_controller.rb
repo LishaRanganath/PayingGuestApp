@@ -1,4 +1,5 @@
 require 'active_merchant/billing/rails'
+require 'prawn'
 # app/controllers/payments_controller.rb
 class PaymentsController < ApplicationController
   def new
@@ -19,17 +20,6 @@ class PaymentsController < ApplicationController
         )
       # debugger
       if credit_card.valid?
-        # Initialize Active Merchant gateway (e.g., for Authorize.Net)
-        # gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
-        #   login: 'sk_test_51PDsj9SHw1sh6agxhWX7VV7wGE2eSiLc9uUN2IHgmRbnJnV0wQSuR6GD7MMXysNgqFJoxVZOfk49DqdQdu46LR7A00QEaKw4t5',
-        #   password: ''
-        # )
-
-        # # Process the payment
-        # response = gateway.purchase(@booking.total_price * 100, credit_card, ip: request.remote_ip)
-        # debugger
-        # if response.success?
-          # Payment successful
           update_booking_payment_status(@booking, 'success')
           @booking.available_room.update(availability: @booking.available_room.availability - 1)
           # debugger
@@ -43,13 +33,9 @@ class PaymentsController < ApplicationController
   def download_invoice
     # debugger
     @booking = Booking.find(params[:id])
-    # Generate the invoice content (replace this with your actual invoice generation logic)
     pdf = Prawn::Document.new
-    pdf.text "Invoice for Booking ##{@booking.id}" # Use @booking.id instead of booking.id
-    # invoice_content = "Invoice for booking ID: #{@booking.id}\nAmount: #{@booking.total_price}"
-
-    # Serve the invoice as a downloadable file
-    send_data pdf.render, filename: "invoice_#{@booking.id}.pdf", type: 'application/pdf' # Use @booking.id instead of booking.id  end
+    pdf.text "Invoice for Booking ##{@booking.id}"
+    send_data pdf.render, filename: "invoice_#{@booking.id}.pdf", type: 'application/pdf' 
 
   end
 

@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
     def create
         building =PgBuilding.find_by(id: category_params[:pg_building_id])
-        category_type = building.categories.create(category_params)
-        if category_type.save
+        category_type = building.categories.create(category_params).save
+        if category_type
             redirect_to pg_building_path(id: building.id), notice: "The room category was created sucessfully"
         else
             redirect_to pg_building_path(id: building.id), notice: "The room category could not be created"
@@ -10,8 +10,8 @@ class CategoriesController < ApplicationController
     end
 
     def destroy
-        category_type=Category.find_by(id: params[:id])
-        if category_type.destroy
+        category_type=Category.find_by(id: params[:id]).destroy
+        if category_type
             redirect_to pg_building_path(id: category_type.pg_building.id), notice: "Category Type was deleted"
         else
             redirect_to pg_building_path(id: category_type.pg_building.id), notice: "Category Type could not be deleted"

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payments</title>
+  <%= javascript_include_tag 'payments' %>
   <%= stylesheet_link_tag 'payments', media: 'all', 'data-turbolinks-track': 'reload' %>
   <!-- Add any additional stylesheets or styles here -->
 </head>
@@ -39,29 +40,4 @@
     </div>
   </div>
 </body>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-  const paymentForm = document.getElementById('payments-form');
-  paymentForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formData = new FormData(paymentForm);
-    
-    fetch(paymentForm.action, {
-      method: paymentForm.method,
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        const downloadLink = document.createElement('a');
-        downloadLink.href = data.download_url;
-        downloadLink.textContent = 'Download Invoice';
-        paymentForm.appendChild(downloadLink);
-      }
-    })
-    .catch(error => console.error('Error:', error));
-  });
-});
-
-</script>
 </html>
