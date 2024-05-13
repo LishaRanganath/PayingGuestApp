@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   }
   resources :owners do
     member do
-      get 'activate'
-      get 'deactivate'
+      put'activate'
+      put'deactivate'
     end
   end
   resources :pg_buildings do

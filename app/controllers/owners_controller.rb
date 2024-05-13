@@ -13,8 +13,9 @@ class OwnersController < ApplicationController
 
   def create
     owner = Owner.new(owner_params)
-    # debugger
+    debugger
     if owner.save
+      debugger
       owner.user.update(role: 'owner')
       redirect_to root_path, notice: "Owner Successfully Added."
     else
@@ -39,6 +40,7 @@ class OwnersController < ApplicationController
   end
 
   def destroy
+    debugger
     owner = get_owner(params[:id])
     user_as_owner = User.find_by(id: owner.user.id)
     if owner.destroy && user_as_owner.destroy

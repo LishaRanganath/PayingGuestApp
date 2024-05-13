@@ -18,11 +18,11 @@
                         <td><%= owner.phone%></td>
                         <td><%= owner.status%></td>
                         <%if owner.status=="deactive"%>
-                            <td><button type="button" class="btn" id="activate_button"><%= link_to 'Activate',activate_owner_path(owner),class: 'action-links'%></button></td>
+                            <td><%= button_to 'Activate', activate_owner_path(id: owner.id), method: :put, class: 'btn action-links' %></td>
                             <td><button type="button" class="btn disabled"><%= link_to 'Deactivate ','#',class: 'action-links',:html => {:disabled => true} %></button></td>     
                         <%else%>
                             <td><button type="button" class="btn disabled"><%= link_to 'Activate','#',class: 'action-links',:html => {:disabled => true} %></button></td>     
-                            <td><button type="button" class="btn" id="deactivate_button"><%= link_to 'Deactivate',deactivate_owner_path(owner),class: 'action-links'%></button></td>
+                            <td><%= button_to 'De-Activate', deactivate_owner_path(id: owner.id), method: :put, class: 'btn action-links' %></td>
                         <%end%>
                         <td><button type="button" class="btn"><%= link_to 'View PGs', list_pg_building_path(owner.id),class: 'action-links'%></button></td>
                         <td><button type="button" class="btn"><%= link_to 'Edit Owner', edit_owner_path(owner.id), class: 'action-links' %></button></td>     
