@@ -1,8 +1,17 @@
 FactoryBot.define do
-    factory :user do
-        email { 'johndoe@gmail.com' }
-        password { '111111' }
-        role {'admin'}
-        phone {'4356278656'}
-      end
+  factory :user do
+    email { 'johnny@gmail.com' }
+    password { '111111' }
+    phone { '4356278656' }
+
+    trait :admin do
+      email { 'admin@example.com' }
+      role { 'admin' }
+    end
+
+    trait :owner do
+      email { 'owner@example.com' }
+      role { 'owner' }
+    end
+  end
 end
