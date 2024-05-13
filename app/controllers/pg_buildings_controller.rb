@@ -1,27 +1,17 @@
 # To handle all the actions of the PG Buildings
 class PgBuildingsController < ApplicationController
   skip_before_action :verify_authenticity_token
-
+  # before_action :check_if_owner, only:[:create,:update,:destroy]
+  #To search a specific Pg building
   def search
-    @resultant_buildings = PgBuilding.where("name LIKE ?", "%#{params[:query]}%").order("LOWER(name)")
+    @resultant_buildings = PgBuildingManager::PgBuildingService.new(params[:query]).search_buildings
     render partial: "home/search_results" ,locals:{resultant_buildings:@resultant_buildings}
   end
 
+  # to filter all the PG Buildings based on Room type/category/ascending/descending
   def filter
-    # debugger
-    order_type = params[:query]
-    @resultant_buildings = PgBuilding.all
-    if params[:query].present?
-      @resultant_buildings = PgBuilding.order(name: order_type)
-    end
-
-    if params[:room_query].present?
-      @resultant_buildings = @resultant_buildings.joins(:room_types).where("room_types.name LIKE ?", "%#{params[:room_query]}%")
-    end
-
-    if params[:category_query].present?
-      @resultant_buildings = @resultant_buildings.joins(:categories).where("categories.name LIKE ?", "%#{params[:category_query]}%")
-    end
+    filter_service = PgBuildingManager::PgBuildingService.new(params)
+    @resultant_buildings = filter_service.filter_buildings
 
     render partial: "home/search_results" ,locals:{resultant_buildings: @resultant_buildings}
   end
@@ -40,12 +30,10 @@ class PgBuildingsController < ApplicationController
 
   #To create the new PG Building
   def create
-    @current_owner = current_user.owner
+    
     @name=building_params[:name]
-    # puts ("=======================================")
-    puts @name
-    new_building = @current_owner.pg_buildings.create(building_params)
-    if new_building.save
+    new_building = current_user.owner.pg_buildings.create(building_params).save
+    if new_building
       redirect_to root_path, notice: "Building added sucessfully"
     else
       render :new, notice: "Building could not be added "
@@ -54,9 +42,8 @@ class PgBuildingsController < ApplicationController
 
   #To destroy the PG Building
   def destroy
-    # puts("=========================================================")
-    building=PgBuilding.find_by(id: params[:id])
-    if building.destroy
+    building=PgBuilding.find_by(id: params[:id]).destroy
+    if building
       redirect_to root_path, notice: "Building deleted"
     else
       redirect_to root_path, notice: "Building cannot be deleted"
@@ -71,4 +58,11 @@ class PgBuildingsController < ApplicationController
   def building_params
     params.require(:pg_building).permit(:name,:phone,:address,:email,:image)
   end
+
+  # def check_if_owner
+  #   if current_user.role == "owner"
+  #     puts "you are owner"
+  #    #  returns true
+  #   end
+  # end
 end

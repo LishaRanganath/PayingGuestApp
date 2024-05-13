@@ -2,14 +2,6 @@ require 'rails_helper'
 
 RSpec.describe OwnersController, type: :request do
 
-  # describe "POST /create" do
-  #   it "render owner#create " do
-  #    owner = Owner.new
-  #    owner = Owner.create(name: "John Doe",phone: "3425367548", status: "deactive")
-  #     # expect(response).to redirect_to()
-  #   end
-
-  # end
   describe "GET /index" do
     it "renders the owner/index template" do
       Rails.application.load_seed
@@ -22,44 +14,80 @@ RSpec.describe OwnersController, type: :request do
     end
   end
 
-  describe "POST/create" do
-    it "Creates the Owner by redirecting to owner#create" do
-      Rails.application.load_seed
-      user = User.find_by(email: "admin1@gmail.com")
-      sign_in user
-      puts user.email
-      user = post owners_path, params: { owner: { name: "john doe", phone: "21324356476", admin_id: 1, user_attributes: { id: 1,email: "alec@gmail.com", password: "password" } } }
-      expect(response).to have_http_status(302)  
-      # puts user.name
+  describe "POST /create" do
+    it "creates the owner and redirects" do
+      admin = FactoryBot.create(:admin)
+      admin_user = admin.user
+      # debugger
+      sign_in admin_user
+      
+      post owners_path, params: {
+        owner: {
+          name: "john doe",
+          phone: "21324356476",
+          admin_id: admin.id,
+          user_attributes: {
+            email: "alec@gmail.com",
+            password: "password"
+          }
+        }
+      }
+      
+      expect(response).to have_http_status(302)
     end
   end
 
-  # describe "GET /activate" do
-  #   it "Activates the Owner" do
+  describe "PUT /activate" do
+    it "Activates the Owner" do
+      admin = FactoryBot.create(:admin)
+      admin_user = admin.user
+      # debugger
+      sign_in admin_user
+      # debugger
+      owner = FactoryBot.create(:owner, admin: admin)
+      put activate_owner_path(id: owner.id)
+      expect(owner.reload.status).to eq("active")
+      # expect(response).to redirect_to(owners_path)
+      expect(response).to have_http_status(302)  
+    end
+  end
+
+
+  # describe "PUT /activate" do
+  #   it "Deactivates the Owner" do
   #     Rails.application.load_seed
   #     user = User.find_by(email: "admin1@gmail.com")
   #     sign_in user
-  #     post owners_path, params: { owner: {id: 1, name: "john doe", phone: "21324356476", admin_id: 1, user_attributes: { email: "john@example.com", password: "password", role: "admin" } } }
-  #     owner = Owner.last
-  #     put activate_owner_path(id: owner.id)
-  #     # expect(owner.reload.status).to eq("active")
+  #     owner= Owner.find_by(status: "active")
+  #     put deactivate_owner_path(id: owner)
+  #     expect(owner.reload.status).to eq("deactive")
   #     # expect(response).to redirect_to(owners_path)
   #     expect(response).to have_http_status(302)  
-
   #   end
   # end
 
-  # describe "DELETE/destroy" do
-  #   it "Destroys the Owner" do
-  #     Rails.application.load_seed
-  #     user = User.find_by(email: "admin1@gmail.com")
-  #     sign_in user
-  #     puts user.email
-  #     user = User.find_by(email: "xoxo@gmail.com")
-  #     puts user.email
-  #     # delete owner_path(user.owner.id)
-  #     # expect(response).to have_http_status(200)
-  #   end
-  # end
+
+  describe "DELETE/destroy" do
+    it "Deletes the owner" do
+      admin = FactoryBot.create(:admin)
+      admin_user = admin.user
+      sign_in admin_user
+      owner = FactoryBot.create(:owner, admin: admin)
+      delete owner_path(id: owner.id)
+      expect(response).to have_http_status(302)
+    end
+  end
+
+  describe "PUT/update" do
+    it "Updates the owner using owners#update" do
+    admin = FactoryBot.create(:admin)
+      admin_user = admin.user
+      sign_in admin_user
+      owner = FactoryBot.create(:owner, admin: admin)
+      put owner_path(owner.id), params: { owner: { name: "Lisha" } }
+      expect(response).to have_http_status(302)
+      expect(owner.reload.name).to eq("Lisha")
+    end
+  end
 
 end

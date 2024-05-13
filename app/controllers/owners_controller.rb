@@ -5,6 +5,7 @@ class OwnersController < ApplicationController
     @deactive_owners = Owner.where(status: "deactive")
     @active_owners = Owner.where(status: "active")
   end
+  
   def new
     @owner = Owner.new
     @owner.build_user
@@ -13,9 +14,9 @@ class OwnersController < ApplicationController
 
   def create
     owner = Owner.new(owner_params)
-    debugger
+    # debugger
     if owner.save
-      debugger
+      # debugger
       owner.user.update(role: 'owner')
       redirect_to root_path, notice: "Owner Successfully Added."
     else
@@ -40,7 +41,7 @@ class OwnersController < ApplicationController
   end
 
   def destroy
-    debugger
+    # debugger
     owner = get_owner(params[:id])
     user_as_owner = User.find_by(id: owner.user.id)
     if owner.destroy && user_as_owner.destroy
@@ -75,6 +76,7 @@ class OwnersController < ApplicationController
   def check_if_admin
     if current_user.role == "admin"
        puts "you are admin"
+      #  returns true
     end
   end
 
@@ -87,6 +89,6 @@ class OwnersController < ApplicationController
     params.require(:owner).permit(:name, :phone,:admin_id)
   end
   def owner_params
-    params.require(:owner).permit(:name, :phone,:admin_id, user_attributes: [:email, :password,:role])
+    params.require(:owner).permit(:name, :phone,:admin_id,:user_id, user_attributes: [:email, :password,:role])
   end
 end

@@ -5,7 +5,7 @@ FactoryBot.define do
     phone { '4356278656' }
 
     trait :admin do
-      email { 'admin@example.com' }
+      email { 'admin1@gmail.com' }
       role { 'admin' }
     end
 
