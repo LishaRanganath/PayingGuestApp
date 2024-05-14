@@ -3,17 +3,25 @@
     <%= stylesheet_link_tag 'building', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+  <div class="form-container" style="display:flex;justify-content: center;">
     <%= form_with(model: AvailableRoom.new, url: available_rooms_path, id: 'room_availability-form',method: :post) do |form| %>
-      <%= form.label :room_type_id, "Select Room Type" %><br />
-      <%= form.select :room_type_id, options_from_collection_for_select(pg_building.room_types, 'id', 'name'), { prompt: 'Select Room Type' }, id: 'room-type-select' %><br />
-      <%= form.label :category_id, "Select Room Category" %><br />
-      <%= form.select :category_id, options_from_collection_for_select(pg_building.categories, 'id', 'name'), { prompt: 'Select Category' }, id: 'category-select' %><br />
-
+      <div class="field">
+        <%= form.label :room_type_id, "Select Room Type", class: "label-text" %><br />
+        <%= form.select :room_type_id, options_from_collection_for_select(pg_building.room_types, 'id', 'name'), { prompt: 'Select Room Type' }, id: 'room-type-select',class: "field-space" %><br />
+      </div>
+      <div class="field">
+        <%= form.label :category_id, "Select Room Category", class: "label-text" %><br />
+        <%= form.select :category_id, options_from_collection_for_select(pg_building.categories, 'id', 'name'), { prompt: 'Select Category' }, id: 'category-select',class: "field-space" %><br />
+      </div>
+      
       <%= form.hidden_field :pg_building_id, value: pg_building.id, id: 'building-id' %>
-      <%= form.label :availability, "Room Availability" %><br />
-      <%= form.text_field :availability%>
-     
-      <%= form.submit "Submit" %>
+      
+      <div class="field">
+        <%= form.label :availability, "Room Availability", class: "label-text" %><br />
+        <%= form.text_field :availability,class: "field-space"%>
+      </div>
+      <%= form.submit "Submit",class: "form-submit-btn"  %>
     <% end %>
+  </div>
   </body>
 </html>

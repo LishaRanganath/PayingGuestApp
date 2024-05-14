@@ -1,19 +1,20 @@
 <html>
   <head></head>
   <body>
+    <div class="form-container">
       <%= form_with(model: RoomType.new,url: room_types_path, method: :post) do |form| %>
         <div class="field">
-          <%= form.label :name, "Room Type" %><br>
-          <%= form.text_field :name %>
+          <%= form.label :name, "Room Type", class: "label-text" %><br>
+          <%= form.text_field :name,class: "field-space" %>
         </div>
          <%= form.hidden_field :pg_building_id, value: pg_building.id %>
         <div class="field">
-          <%= form.label :price, "Cost per Day" %><br>
-          <%= form.text_field :price %>
+          <%= form.label :price, "Cost per Day", class: "label-text" %><br>
+          <%= form.text_field :price,class: "field-space" %>
         </div>
 
-        <%= form.submit "Submit" %>
+        <%= form.submit "Submit",class: "form-submit-btn" %>
       <% end %>
-        </div>
+    </div>
   </body>
 </html>

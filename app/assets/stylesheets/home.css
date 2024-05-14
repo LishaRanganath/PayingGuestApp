@@ -223,3 +223,8 @@ body {
   padding-top: 5%;
   color: rgba(81, 78, 78, 0.892);
 }
+.form-select-field{
+  width: 150px;
+  height: 30px;
+  background-color: #fff;
+}

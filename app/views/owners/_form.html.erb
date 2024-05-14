@@ -1,37 +1,32 @@
 <html>
   <head>
-    <style>
-      .form-container{
-        display:flex;
-        justify-content: center;
-      }
-    </style>
+    <%= stylesheet_link_tag "modal-form" %>
   </head>
   <body>
     <div class="form-container">
       <%= form_with(model: owner,url: path, method: method) do |form| %>
         <div class="field">
-          <%= form.label :name, "Owner Name"%><br>
-          <%= form.text_field :name , id:"name"%>
+          <%= form.label :name, "Owner Name", class: "label-text"%><br>
+          <%= form.text_field :name , id:"name", class: "field-space"%>
         </div>
         <div class="field">
-          <%= form.label :phone, "Phone Number" %><br>
-          <%= form.text_field :phone %>
+          <%= form.label :phone, "Phone Number", class: "label-text" %><br>
+          <%= form.text_field :phone, class: "field-space" %>
         </div>
          <%= form.hidden_field :admin_id , value: current_user.admin.id %>
 
         <%= form.fields_for :user_attributes do |user_fields| %>
           <div class="field">
-            <%= user_fields.label :email, "Email Address" %><br>
-            <%= user_fields.email_field :email %>
+            <%= user_fields.label :email, "Email Address", class: "label-text" %><br>
+            <%= user_fields.email_field :email, class: "field-space" %>
           </div>
           <div class="field">
-            <%= user_fields.label :password, "Password" %><br>
-            <%= user_fields.password_field :password %>
+            <%= user_fields.label :password, "Password", class: "label-text" %><br>
+            <%= user_fields.password_field :password, class: "field-space" %>
           </div>
         <% end %>
 
-        <%= form.submit "Submit" %>
+        <%= form.submit "Submit",class: "form-submit-btn" %>
       <% end %>
         </div>
   </body>

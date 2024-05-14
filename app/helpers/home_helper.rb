@@ -58,9 +58,9 @@ module HomeHelper
 
     def modal_title_based_on_role(current_user)
         if current_user && current_user.role == "admin"
-           "Add Building"
+           "Add Owner"
         else
-            "Add Owner"
+            "Add Building"
         end
     end
     
