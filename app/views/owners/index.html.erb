@@ -14,7 +14,7 @@
                 </tr>
                 <% @owner_all.each do |owner| %>
                     <tr>
-                        <td><%= owner.name%></td>
+                        <td class="table_row_name_data"><%= owner.name%></td>
                         <td><%= owner.phone%></td>
                         <td><%= owner.status%></td>
                         <%if owner.status=="deactive"%>

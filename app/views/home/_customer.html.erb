@@ -1,19 +1,37 @@
-<div class="grid-container", style="width: 100%">
-    <%all_pg_buildings_customer(@pg_buildings,current_user).each do |building| %>
-                <div class="item", id="building">
-                    <%=link_to pg_building_path(building.id), method: :get do%>
-                        <div class="image_container">
-                            <%= building_image_tag(building) %>
-                        </div>
-                    <%end%>
-                    <div class="content">
-                        <div class="details">
-                            <b><p><%=building.name%></p></b>
-                            <p><%=building.phone%></p>
-                            <p><%=building.email%></p>
-                            <p><%=building.address%></p>
-                        </div>
+   <%= javascript_include_tag 'search' %>
+            <div id="filter-form">
+                <%= form_with url: filter_buildings_path do |f| %>
+                    <%= f.select :query, options_for_select([['A-Z', 'asc'], ['Z-A', 'desc'], ['Location', 'loc']]), { prompt: 'Select One' }, id: 'filter-select', class: 'form-select-field' %>
+                    <%= f.select :room_query, options_for_select([['Sinle-Sharing', 'Single'], ['Double-Sharing', 'Double'], ['Triple-Sharing', 'Triple']]), { prompt: 'Select Room Type' }, id: 'room-select', class: 'form-select-field' %>
+                    <%= f.select :category_query, options_for_select([['With-AC', 'AC'], ['Without-AC', 'non-ac']]), { prompt: 'Select Room Category' }, id: 'category-select', class: 'form-select-field' %>
+                    <%= f.submit "Filter" ,id:"filter-btn", class: 'btn'%>
+                <% end %>
+            </div>
+            <div id="search-form">
+                <%= form_with url: search_buildings_path do |f| %>
+                    <%= f.label :Search %>
+                    <%= f.text_field :Search ,id:"search", class: 'form-field'%>
+                    <%= f.submit "Submit" ,id:"submit-btn", class: 'btn'%>
+                <% end %>
+            </div>
+<div class="grid-container"  style="width: 100%" id="result-div" >
+    <%@pg_buildings.each do |building|%>
+        <%if building.owner.status == "active"%>
+            <div class="item", id="building">
+                <%=link_to pg_building_path(building.id), method: :get do%>
+                    <div class="image_container">
+                        <%= building_image_tag(building) %>
+                    </div>
+                <%end%>
+                <div class="content">
+                    <div class="details">
+                        <b><p><%=building.name%></p></b>
+                        <p>phone: <%=building.phone%></p>
+                        <p><%=building.email%></p>
+                        <p><%=building.address%></p>
                     </div>
                 </div>
+            </div>
         <%end%>
+    <%end%>
 </div>
