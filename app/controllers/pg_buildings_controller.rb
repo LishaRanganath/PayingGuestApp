@@ -12,6 +12,7 @@ class PgBuildingsController < ApplicationController
   def filter
     filter_service = PgBuildingManager::PgBuildingService.new(params)
     @resultant_buildings = filter_service.filter_buildings
+    # debugger
 
     render partial: "home/search_results" ,locals:{resultant_buildings: @resultant_buildings}
   end
