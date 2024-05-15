@@ -1,4 +1,4 @@
-class PaymetConfirmationMailer < ApplicationMailer
+class PaymentConfirmationMailer < ApplicationMailer
     default from: 'lissrang123@gmail.com'
 
     def payment_confirmation_email
