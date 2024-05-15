@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :bookings do
         member do
             put 'complaints'
+            get 'list'
         end
   end
   post '/calculate_price', to: 'bookings#calculate_price'

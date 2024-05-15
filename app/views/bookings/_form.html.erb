@@ -1,28 +1,33 @@
 <html>
   <head>
-
   </head>
   <body>
+    <div class="form-container">
     <%= form_with(model: Booking, url:  bookings_path, id: 'booking-form',method: :post) do |form| %>   
-      <%= form.label :start_date, "Select Date", id: 'label' %><br />
-      <%= form.date_field :start_date, min: Date.today, max: 2.month.from_now.to_date, id: 'date-select',class: 'form-field'  %><br />
-      <br />
-      <%= form.label :duration_id, "Select Duration", id: 'label' %><br />
-      <%= form.select :duration_id, options_from_collection_for_select(Duration.all, 'id', 'name'), { prompt: 'Select Duration' }, id: 'duration-select',class: "form-field"  %><br />
+      <div class = "field">
+        <%= form.label :start_date, "Select Date", id: 'start_date_select', class: "label-text"  %><br />
+        <%= form.date_field :start_date, min: Date.today, max: 2.month.from_now.to_date, id: 'date-select',class: "field-space"  %>
+      </div>
+      <div class = "field">
+        <%= form.label :duration_id, "Select Duration", id: 'duration_select', class: "label-text"  %><br />
+        <%= form.select :duration_id, options_from_collection_for_select(Duration.all, 'id', 'name'), { prompt: 'Select Duration' }, id: 'duration-select', class: "field-space"  %>
+      </div>
       <%= form.hidden_field :available_room_id, value: room.id, id: 'room-id' %>
-      <br />
-      <%= form.label :number_of_guests, "Number Of Guests", id: 'label' %><br />
-      <%= form.number_field :number_of_guests, value: 1, step: 1, id: 'number-of-guests',class: "form-field"  %><br />
-
-      <br />
-      <%= form.label :number_of_rooms, "Total rooms", id: 'label' %><br />
-      <%= form.number_field :number_of_rooms, value: 1, step: 1, id: 'number-of-rooms',class: "form-field"  %><br />
-
+      <div class = "field">
+        <%= form.label :number_of_guests, "Number Of Guests", id: 'number_of_guests', class: "label-text"  %><br />
+        <%= form.number_field :number_of_guests, value: 1, step: 1, id: 'number-of-guests', class: "field-space" %>
+      </div>
+     
+     <div class = "field">
+      <%= form.label :number_of_rooms, "Total rooms", id: 'total_rooms', class: "label-text"  %><br />
+      <%= form.number_field :number_of_rooms, value: 1, step: 1, id: 'number-of-rooms', class: "field-space"  %>
+    </div>
      <div id="price_field">
      Price:
      </div>
-      <%= form.submit "Book" %>
+      <%= form.submit "Book",class: "form-submit-btn"   %>
     <% end %>
+  </div>
   </body>
   
 <script>

@@ -51,11 +51,10 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-          <h1 class="modal-title fs-10" id="exampleModalLabel">Add Category Type</h1>
+          <h1 class="modal-title fs-10" id="exampleModalLabel">Book Room</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body"> 
-        <%= room.id%>
         <%= render partial: "bookings/form" , locals: {pg_building: pg_building, room: room}%>
       </div>
     </div>

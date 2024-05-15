@@ -9,6 +9,7 @@
         <%= form.label :room_type_id, "Select Room Type", class: "label-text" %><br />
         <%= form.select :room_type_id, options_from_collection_for_select(pg_building.room_types, 'id', 'name'), { prompt: 'Select Room Type' }, id: 'room-type-select',class: "field-space" %><br />
       </div>
+      <br />
       <div class="field">
         <%= form.label :category_id, "Select Room Category", class: "label-text" %><br />
         <%= form.select :category_id, options_from_collection_for_select(pg_building.categories, 'id', 'name'), { prompt: 'Select Category' }, id: 'category-select',class: "field-space" %><br />

@@ -9,10 +9,14 @@ class BookingsController < ApplicationController
         @bookings = Booking.where(user_id: params[:id],booking_status: "success")
         if current_user && current_user.owner
             @pg_buildings = current_user.owner.pg_buildings
-            
         end
     end
 
+    def list
+        if current_user && current_user.owner
+            @pg_buildings = current_user.owner.pg_buildings
+        end
+    end
     def complaints
             @booking = Booking.find_by(id: params[:id])
             if @booking.has_complaint?

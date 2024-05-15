@@ -10,6 +10,11 @@
 </head>
 <body>
 <h1 >Payment Details</h1>
+<div class= "main-container">
+  <div class = "total">
+    <h4>Total Price: &nbsp $<%= @booking.total_price%></h4>
+    <h6>Please pay to complete your booking</h6>
+  </div>
   <div class="container">
     
     <div class="payments-form">
@@ -39,5 +44,6 @@
       <% end %>
     </div>
   </div>
+</div>
 </body>
 </html>

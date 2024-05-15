@@ -1,9 +1,28 @@
 /* Add this CSS to payments.css */
-.container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px;
+.main-container {
+  display: flex;
+  align-items: center;
+  
+
+}
+.main-container .container {
+    width: 70%;
+    /* margin: 0 auto; */
+    /* padding: 20px; */
+    
+
   }
+.main-container .total{
+  text-align: center;
+  padding-left: 10%;
+  padding-top: 7%;
+  padding-bottom: 7%;
+  width: 30%;
+  background-color:  #ccf2ff;
+}
+.main-container .total h4{
+  font-size: 28px;
+}
   
   h1 {
     text-align: center;
@@ -16,7 +35,8 @@
     background-color: #f8f9fa;
     border: 1px solid #ced4da;
     border-radius: 5px;
-    width: 40%;
+    margin-right: 51%;
+    width: 50%;
     padding-left: 5%;
     /* padding: 20px; */
   }
