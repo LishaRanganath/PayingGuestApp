@@ -22,6 +22,7 @@ class PaymentsController < ApplicationController
       if credit_card.valid?
           update_booking_payment_status(@booking, 'success')
           @booking.available_room.update(availability: @booking.available_room.availability - 1)
+          PaymetConfirmationMailer.with(user: current_user, booking: @booking).payment_confirmation_email.deliver_now
           # debugger
           render json: { success: true, download_url: download_invoice_path(@booking.id) } 
         else

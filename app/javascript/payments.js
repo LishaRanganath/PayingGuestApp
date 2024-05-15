@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
+          paymentForm.reset();
           const downloadLink = document.createElement('a');
           downloadLink.href = data.download_url;
           downloadLink.textContent = 'Download Invoice';
