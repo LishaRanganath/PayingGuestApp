@@ -29,6 +29,19 @@ class PgBuildingsController < ApplicationController
     @pg_building = PgBuilding.new
   end
 
+  def edit
+    @building = PgBuilding.find_by(id: params[:id])
+  end
+
+  def update
+    building = PgBuilding.find(params[:id])
+    if building.update(building_params)
+      redirect_to root_path, notice: "Building updated sucessfully"
+    else
+      redirect_to root_path, notice: "Could not update Building, Try Again!!"
+    end
+  end
+
   #To create the new PG Building
   def create
     

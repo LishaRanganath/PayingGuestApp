@@ -20,7 +20,7 @@ module PgBuildingHelper
             concat content_tag(:td, button_to('Delete', room_type_path(id: room.id), class: 'btn', method: :delete))
           end
         end.join.html_safe
-      end
+    end
 
     def render_categories(categories)
         categories.map do |category|

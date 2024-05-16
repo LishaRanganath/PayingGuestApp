@@ -10,6 +10,19 @@ class AvailableRoomsController < ApplicationController
         end
     end
 
+    def edit
+        @room = AvailableRoom.find_by(id: params[:id])
+    end
+
+    def update
+        room = AvailableRoom.find(params[:id])
+        if room.update(room_params)
+        redirect_to root_path, notice: "Room updated sucessfully"
+        else
+        redirect_to root_path, notice: "Could not update Room, Try Again!!"
+        end
+    end
+
     def destroy
         available_room=AvailableRoom.find_by(id: params[:id])
         building = PgBuilding.find_by(id: available_room.pg_building.id)

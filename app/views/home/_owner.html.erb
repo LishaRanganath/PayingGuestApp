@@ -43,7 +43,7 @@
                             <%= button_to 'Delete', pg_building_path(building.id), method: :delete, data: { confirm: 'Are you sure?' },class:"btn" %>
                             <br />
                             <br />
-                            <button class="btn"><%= link_to 'Edit',class:'links'%></button>
+                            <button class="btn"><%= link_to 'Edit',edit_pg_building_path(building.id),class:'links'%></button>
                         </div>
                     </div>
                     
