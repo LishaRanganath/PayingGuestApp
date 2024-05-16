@@ -6,6 +6,7 @@ class PaymentsController < ApplicationController
 
   def create
     @booking = Booking.find_by(id: params[:booking_id])
+    # debugger
     payment_processor = PaymentsManager::PaymentProcessor.new(params, current_user)
     result = payment_processor.process_payment
 

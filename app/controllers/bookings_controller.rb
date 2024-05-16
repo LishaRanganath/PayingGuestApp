@@ -29,7 +29,9 @@ class BookingsController < ApplicationController
             end
     end
     def create
+        # debugger
         booking_creator = BookingsManager::BookingsCreator.new(current_user, booking_params)
+        
         result = booking_creator.create_booking
     
         if result[:success]

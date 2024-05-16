@@ -25,19 +25,19 @@
         <%= form.label :last_name, "Last Name", class: 'form-label' %><br>
         <%= form.text_field :last_name, class: 'form-field' %><br>
 
-        <%= form.label :card_number, 'Credit Card Number', class: 'form-label' %><br />
-        <%= form.text_field :card_number, class: 'form-field' %><br />
+        <%= form.label :number, 'Credit Card Number', class: 'form-label' %><br />
+        <%= form.text_field :number, class: 'form-field' %><br />
 
         <%= form.hidden_field :booking_id, value: @booking.id %>
         
-        <%= form.label :card_month, 'Expiration Month', class: 'form-label' %><br />
-        <%= form.text_field :card_month, class: 'form-field' %><br />
+        <%= form.label :month, 'Expiration Month', class: 'form-label' %><br />
+        <%= form.text_field :month, class: 'form-field' %><br />
 
-        <%= form.label :card_year, 'Expiration Year', class: 'form-label' %><br />
-        <%= form.text_field :card_year, class: 'form-field' %><br />
+        <%= form.label :year, 'Expiration Year', class: 'form-label' %><br />
+        <%= form.text_field :year, class: 'form-field' %><br />
 
-        <%= form.label :card_cvv, 'CVV', class: 'form-label' %><br />
-        <%= form.text_field :card_cvv, class: 'form-field' %><br />
+        <%= form.label :verification_value, 'CVV', class: 'form-label' %><br />
+        <%= form.text_field :verification_value, class: 'form-field' %><br />
 
         <%= form.submit 'Submit Payment', class: 'btn-submit' %><br />
         <br />

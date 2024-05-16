@@ -196,11 +196,15 @@ body {
   width: 500px;
   height: 50px;
 }
-#search-form .btn {
+#search-form .form-btn {
   height: 50px;
   width: 100px;
   position: relative;
   font-size: 20px;
+  background-color: rgba(170, 165, 165, 0.64);
+}
+#search-form .form-btn:hover {
+  background-color: rgb(142, 140, 140);
 }
 #filter-form {
   margin-top: 1%;
@@ -212,18 +216,23 @@ body {
   width: 150px;
   height: 30px;
 }
-#filter-form .btn {
+#filter-form .form-btn {
   height: 35px;
   width: 90px;
   /* position: relative; */
   font-size: 16px;
+  background-color: rgba(170, 165, 165, 0.64);
+}
+
+#filter-form .form-btn:hover {
+  background-color: rgb(142, 140, 140);
 }
 .error-message {
   text-align: center;
   padding-top: 5%;
   color: rgba(81, 78, 78, 0.892);
 }
-.form-select-field{
+.form-select-field {
   width: 150px;
   height: 30px;
   background-color: #fff;

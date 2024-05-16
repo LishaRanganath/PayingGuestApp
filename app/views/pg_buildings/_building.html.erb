@@ -108,7 +108,7 @@
                                         <td><%= room.category.name%></td>
                                         <td><%= room.availability%></td>
                                         <td><%= room.room_price%></td>
-                                        <td><button type="button" id="book_room" class="btn" data-bs-toggle="modal" data-bs-target="#bookroomModal_<%= room.id %>">Book</button></td>
+                                        <td><button type="button" id="book_room" class="btn" data-bs-toggle="modal" data-bs-target="#bookroomModal_<%= room.id %>", data-room-id = "<%=room.id%>" >Book</button></td>
                                         <%= render partial: "modal", locals: {pg_building: pg_building, room: room}%>
                                     </tr>
                                 <%end%>

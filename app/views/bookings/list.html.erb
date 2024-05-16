@@ -1,0 +1,29 @@
+ <%= stylesheet_link_tag 'bookings', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+ <table class = "complaints-table">
+    <thead>
+      <tr>
+        <th>Booking-ID</th>
+        <th>Start Date</th>
+        <th>Name</th>
+        <th>Duration</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>   
+    <tbody>
+      <% @pg_buildings.each do |building|%>
+    <% building.available_rooms.each do |room|%>
+        <% room.bookings.each do |booking|%>
+        <tr>
+          <td><%= booking.id %></td>
+          <td><%= booking.start_date %></td>
+          <td><%= booking.user.name%></td>
+          <td><%= booking.duration.name %></td>
+          <td><%= booking.total_price %></td>
+        </tr>
+     <%end%>
+    <%end%>
+<%end%>
+    </tbody>
+  </table>
+        

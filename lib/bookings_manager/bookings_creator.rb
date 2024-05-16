@@ -6,6 +6,7 @@ module BookingsManager
           end
         
           def create_booking
+            # debugger
             return { success: false, error_message: "User not logged in" } unless @current_user && @current_user.role == "user"
         
             room = AvailableRoom.find_by(id: @booking_params[:available_room_id])
