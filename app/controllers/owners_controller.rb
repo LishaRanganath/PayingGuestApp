@@ -1,7 +1,9 @@
 class OwnersController < ApplicationController
   before_action :check_if_admin
   def index
-    @owner_all = Owner.all
+    if current_user
+      @owner_all = current_user.admin.owners
+    end
     @deactive_owners = Owner.where(status: "deactive")
     @active_owners = Owner.where(status: "active")
   end
@@ -74,7 +76,7 @@ class OwnersController < ApplicationController
   private
 
   def check_if_admin
-    if current_user.role == "admin"
+    if current_user && current_user.role == "admin"
        puts "you are admin"
       #  returns true
     end

@@ -27,7 +27,7 @@ class AvailableRoomsController < ApplicationController
         available_room=AvailableRoom.find_by(id: params[:id])
         building = PgBuilding.find_by(id: available_room.pg_building.id)
         if available_room.destroy
-            debugger
+            # debugger
             redirect_to pg_building_path(id: building.id), notice: "Room Was deleted"
         else
             redirect_to pg_building_path(id: building.id), notice: "Could Not Delete The Room"

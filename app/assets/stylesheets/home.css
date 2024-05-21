@@ -62,17 +62,20 @@ body {
   margin: 0 10px;
   opacity: 0.9;
 }
-.container_grid .row .col .btn {
+.container_grid .row .col .action_btns {
   border: 2px solid black;
+  background-color: #b9b5b5f5;
+  border-radius: 10px;
   width: 300px;
+  height: 80px;
 }
-.container_grid .row .col .btn .links {
+.container_grid .row .col .action_btns .links {
   text-decoration: none;
   color: black;
   padding-left: 20%;
 }
-.container_grid .row .col .btn:hover {
-  background-color: #12111142;
+.container_grid .row .col .action_btns:hover {
+  background-color: #1d1c1c9b;
 }
 .register_container {
   height: 100%;
@@ -164,12 +167,12 @@ body {
   height: 50px;
 }
 
-.action_buttons {
+.admin_action_buttons {
   display: flex;
   justify-content: center;
   margin-top: 4%;
 }
-.action_buttons .btn {
+.admin_action_buttons .btn {
   color: black;
   background-color: #ffffff0e;
   border: 2px solid rgb(16, 13, 13);
@@ -178,13 +181,13 @@ body {
   height: 50px;
   font-size: 20px;
 }
-.action_buttons .btn .links {
+.admin_action_buttons .btn .links {
   text-decoration: none;
   font-size: 20px;
   padding-left: 25%;
   color: black;
 }
-.action_buttons .btn:hover {
+.admin_action_buttons .btn:hover {
   background-color: #12111142;
 }
 #search-form {

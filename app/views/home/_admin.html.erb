@@ -19,7 +19,7 @@
                     <span><%= current_user.admin.name %></span>
             </div>
         </div>
-        <div class="action_buttons">
+        <div class="admin_action_buttons">
             <button type="button" id="add_owner_input" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Owner</button>
             <button type="button" id="myInput1" class="btn"><%= link_to 'Edit Owner',owners_path,class:"links"%></button>
         </div>
@@ -32,21 +32,21 @@
                     <h6><%= @deactive_count %></h6>
                     <br />
                     </span>
-                    <button type="button" class="btn"><%= link_to 'Activate', owners_path, method: :get,class:"links"%></button>
+                    <button type="button" class="action_btns"><%= link_to 'Activate', owners_path, method: :get,class:"links"%></button>
                 </div>
                 <div class="col">
                     <h4>Active PG Owners</h4>
                     <br />
                     <h6><%= @active_count %></h6>
                     <br />
-                    <button type="button" class="btn"><%= link_to 'De-Activate', owners_path, method: :get,class:"links"%></button>
+                    <button type="button" class="action_btns"><%= link_to 'De-Activate', owners_path, method: :get,class:"links"%></button>
                 </div>
                 <div class="col">
                     <h4>Total PG Owners</h4>
                     <br />
                     <h6><%= current_user.admin.owners.count%></h6>
                     <br />
-                    <button type="button" class="btn"><%= link_to 'View All', owners_path, method: :get,class:"links"%></button>
+                    <button type="button" class="action_btns"><%= link_to 'View All', owners_path, method: :get,class:"links"%></button>
                 </div>
                 <div class="col">
                     <h4>Total PG's</h4>
@@ -54,7 +54,7 @@
                     <b><%= active_buildings_count(current_user)%></b>
                     <br />
                     <br />
-                    <button type="button" class="btn"><%= link_to 'View All', '#', method: :get,class:"links"%></button>
+                    <button type="button" class="action_btns"><%= link_to 'View All', '#', method: :get,class:"links"%></button>
                 </div>
             </div>
         </div>

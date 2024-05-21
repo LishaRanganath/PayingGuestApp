@@ -7,12 +7,40 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-u1=User.build(email:"admin1@gmail.com", password:"admin123",role:"admin")
-u1.save
-admin = u1.build_admin(name: "Lisha")
-admin.save
+# db/seeds.rb
+# db/seeds.rb
+# db/seeds.rb
+require 'faker'
 
-u2=User.build(email:"admin2@gmail.com", password:"admin123",role:"admin")
-u2.save
-admin = u2.build_admin(name: "Parshwa")
-admin.save
+# Create 3 Admins
+3.times do |i|
+  user = User.new(email: "admin#{i+1}@gmail.com", password: "admin123", role: "admin")
+  if user.save
+    admin = user.build_admin(name: Faker::Name.name)
+    if admin.save
+      # Create 5 Owners for each Admin
+      5.times do
+        owner_user = User.new(email: Faker::Internet.email, password: 'password', role: 'owner')
+        if owner_user.save
+          owner = owner_user.build_owner(name: Faker::Name.name, phone: Faker::PhoneNumber.phone_number, admin: admin)
+          if owner.save
+            # Create 10 PG Buildings for each Owner
+            10.times do
+              PgBuilding.create!(
+                name: "#{Faker::Address.street_name} PG",
+                address: Faker::Address.full_address,
+                phone: Faker::PhoneNumber.phone_number,
+                email: Faker::Internet.email,
+                # image: Faker::Placeholdit.image(size: "600x400", text: 'Building'),
+                owner: owner
+              )
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+puts "Seeding complete!"
+

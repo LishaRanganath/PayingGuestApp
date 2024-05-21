@@ -35,6 +35,33 @@ RSpec.describe OwnersController, type: :request do
       
       expect(response).to have_http_status(302)
     end
+
+    it "does not create owner if email is null" do
+      admin = FactoryBot.create(:admin)
+      admin_user = admin.user
+      # debugger
+      sign_in admin_user
+      initial_owner_count = Owner.count
+
+      post owners_path, params: {
+        owner: {
+          name: "john doe",
+          phone: "21324356476",
+          admin_id: admin.id,
+          user_attributes: {
+            password: "password",
+            email: nil
+          }
+        }
+      }
+    final_owner_count = Owner.count
+    expect(final_owner_count).to eq(initial_owner_count)
+    expect(response).to have_http_status(302)
+    
+
+    # Verify flash message or form errors
+    # expect(response.body).to include("Email can't be blank")
+    end
   end
 
   describe "PUT /activate" do
