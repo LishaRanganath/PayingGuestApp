@@ -9,7 +9,7 @@ module PgBuildingManager
             filter_by_order_type
             filter_by_room_query
             filter_by_category_query
-            @model
+            @model.distinct
         end
     
         private

@@ -20,8 +20,7 @@ class PaymentsController < ApplicationController
 
   def download_invoice
     @booking = Booking.find(params[:id])
-    pdf = Prawn::Document.new
-    pdf.text "Invoice for Booking ##{@booking.id}"
+    pdf = InvoicePdfGenerator.new(@booking).generate
     send_data pdf.render, filename: "invoice_#{@booking.id}.pdf", type: 'application/pdf' 
   end
 end
