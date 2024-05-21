@@ -1,7 +1,6 @@
 <html>
     <head>
         <%= javascript_include_tag 'owners' %>
-        <%= stylesheet_link_tag 'modal', media: 'all', 'data-turbolinks-track': 'reload' %>
     </head>
     <body>
         <%= render partial: "modal"%>
@@ -54,7 +53,7 @@
                     <b><%= active_buildings_count(current_user)%></b>
                     <br />
                     <br />
-                    <button type="button" class="action_btns"><%= link_to 'View All', '#', method: :get,class:"links"%></button>
+                    <button type="button" class="action_btns"><%= link_to 'View All',owners_path, method: :get,class:"links"%></button>
                 </div>
             </div>
         </div>

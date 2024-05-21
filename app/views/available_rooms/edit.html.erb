@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'edit_form'%>
+<div class="edit-form-container">
 <%= form_for(@room, url:  available_room_path(@room.id), method: :patch) do |form| %>
     <div class="field">
         <%= form.label :room_type_id, "Select Room Type", class: "label-text" %><br />
@@ -17,3 +19,4 @@
       </div>
       <%= form.submit "Submit",class: "form-submit-btn"  %>
     <% end %>
+</div>

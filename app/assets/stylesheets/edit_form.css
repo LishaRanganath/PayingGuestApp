@@ -1,0 +1,23 @@
+.edit-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+}
+.edit-form-container .field-space {
+  width: 420px;
+  height: 40px;
+  margin-bottom: 3%;
+}
+.edit-form-container .label-text {
+  font-size: 20px;
+}
+.form-submit-btn{
+    width: 420px;
+    height: 50px;
+    font-size: 24px;
+    background-color: #00b8e6;
+}
+.form-submit-btn:hover {
+    background-color: #0094c7; 
+}

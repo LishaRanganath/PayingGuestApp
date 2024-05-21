@@ -1,28 +1,31 @@
-<%= form_for(@building, url: pg_building_path(@building.id), method: :patch) do |form| %>
-    <div class="field">
-            <%= form.label :name, "Name:" , class: "label-text"%><br>
-            <%= form.text_field :name ,class: "field-space" %>
-            </div>
+<%= stylesheet_link_tag 'edit_form', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class = "edit-form-container">
+   <%= form_for(@building, url: pg_building_path(@building.id), method: :patch) do |form| %>
+        <div class="field">
+                <%= form.label :name, "Name:" , class: "label-text"%><br>
+                <%= form.text_field :name ,class: "field-space" %>
+                </div>
 
-            <div class="field">
-            <%= form.label :phone, "Phone Number:", class: "label-text" %><br>
-            <%= form.text_field :phone ,class: "field-space" %>
-            </div>
+                <div class="field">
+                <%= form.label :phone, "Phone Number:", class: "label-text" %><br>
+                <%= form.text_field :phone ,class: "field-space" %>
+                </div>
 
-            <div class="field">
-            <%= form.label :address, "Location:", class: "label-text" %><br>
-            <%= form.text_field :address, class: "field-space" %>
-            </div>
-            <div class="field">
-            <%= form.label :email, "Email:", class: "label-text" %><br>
-            <%= form.text_field :email, class: "field-space" %>
-            </div>
+                <div class="field">
+                <%= form.label :address, "Location:", class: "label-text" %><br>
+                <%= form.text_field :address, class: "field-space" %>
+                </div>
+                <div class="field">
+                <%= form.label :email, "Email:", class: "label-text" %><br>
+                <%= form.text_field :email, class: "field-space" %>
+                </div>
 
-            <div class="field">
-                <%= form.label :image,"Image:", class: "label-text" %>&nbsp &nbsp &nbsp
-                <%= form.file_field :image,style: 'width: 250px;'%><br />
-            </div>
+                <div class="field">
+                    <%= form.label :image,"Image:", class: "label-text" %>&nbsp &nbsp &nbsp
+                    <%= form.file_field :image,style: 'width: 250px;'%><br />
+                </div>
 
-            <br />
-            <%= form.submit "Add Building",class: "form-submit-btn"%>
-<%end%>
+                <br />
+                <%= form.submit "Add Building",class: "form-submit-btn"%>
+    <%end%>
+</div>

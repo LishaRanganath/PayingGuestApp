@@ -22,7 +22,7 @@
         <%else%>
         <div id="filter-form">
                 <%= form_with url: filter_buildings_path do |f| %>
-                    <%= f.select :query, options_for_select([['A-Z', 'asc'], ['Z-A', 'desc'], ['Location', 'loc']]), { prompt: 'Select One' }, id: 'filter-select', class: 'form-select-field' %>
+                    <%= f.select :query, options_for_select([['A-Z', 'asc'], ['Z-A', 'desc']]), { prompt: 'Select One' }, id: 'filter-select', class: 'form-select-field' %>
                     <%= f.select :room_query, options_for_select([['Single-Sharing', 'Single'], ['Double-Sharing', 'Double'], ['Triple-Sharing', 'Triple']]), { prompt: 'Room Type' }, id: 'room-select', class: 'form-select-field' %>
                     <%= f.select :category_query, options_for_select([['With-AC', 'AC'], ['Without-AC', 'non-ac']]), { prompt: 'Room Category' }, id: 'category-select', class: 'form-select-field' %>
                     <%= f.submit "Filter" ,id:"filter-btn", class: 'form-btn'%>

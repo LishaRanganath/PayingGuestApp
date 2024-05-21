@@ -1,6 +1,8 @@
 module PaymentsManager
     class PdfGenerator
         require 'prawn'
+        include Prawn::Tables
+        include Prawn::View
     
         def initialize(booking)
             @booking = booking

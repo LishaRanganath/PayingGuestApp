@@ -64,6 +64,10 @@ class PgBuildingsController < ApplicationController
     end
   end
 
+  def list
+    @buildings = PgBuilding.all
+  end
+
 
 
 

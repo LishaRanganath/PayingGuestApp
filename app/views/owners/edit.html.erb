@@ -1,27 +1,24 @@
 <html>
   <head>
     <style>
-      .form-container {
-        display: flex;
-        justify-content: center;
-      }
+      <%= stylesheet_link_tag 'edit_form', media: 'all', 'data-turbolinks-track': 'reload' %>
     </style>
   </head>
   <body>
-    <div class="form-container">
+    <div class="edit-form-container">
       <%= form_for(@owner, url: owner_path(@owner.id), method: :patch) do |form| %>
         <div class="field">
-          <%= form.label :name, "Owner Name" %><br>
-          <%= form.text_field :name, id: "name", value: form.object.name %>
+          <%= form.label :name, "Owner Name", class: "label-text"%><br>
+          <%= form.text_field :name, id: "name", value: form.object.name,class: "field-space" %>
         </div>
         <div class="field">
-          <%= form.label :phone, "Phone Number" %><br>
-          <%= form.text_field :phone, value: form.object.phone %>
+          <%= form.label :phone, "Phone Number",  class: "label-text" %><br>
+          <%= form.text_field :phone, value: form.object.phone,class: "field-space" %>
         </div>
         <%= form.hidden_field :admin_id, value: current_user.admin.id %>
-
-        <%= form.submit "Submit" %>
+        <br />
+        <%= form.submit "Edit Owner",class: "form-submit-btn"%>
       <% end %>
     </div>
-  </body>
+</body>
 </html>

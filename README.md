@@ -22,4 +22,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-![alt text](<Screenshot 2024-05-06 at 10.21.49 AM.png>)
+![alt text](<Screenshot 2024-05-21 at 1.05.22 PM.png>)

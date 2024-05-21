@@ -1,17 +1,21 @@
 <html>
-  <head></head>
+  <head>
+    <%= stylesheet_link_tag 'edit_form' %>
+
+  </head>
   <body>
+    <div class="edit-form-container">
       <%= form_with(model: @room_type,url: room_type_path(@room_type.id), method: :patch) do |form| %>
         <div class="field">
-          <%= form.label :name, "Room Type" %><br>
-          <%= form.text_field :name %>
+          <%= form.label :name, "Room Type", class: "label-text" %><br>
+          <%= form.text_field :name,class: "field-space" %>
         </div>
         <div class="field">
-          <%= form.label :price, "Cost per Day" %><br>
-          <%= form.text_field :price %>
+          <%= form.label :price, "Cost per Day", class: "label-text" %><br>
+          <%= form.text_field :price,class: "field-space" %>
         </div>
 
-        <%= form.submit "Submit" %>
+        <%= form.submit "Submit",class: "form-submit-btn" %>
       <% end %>
         </div>
   </body>
