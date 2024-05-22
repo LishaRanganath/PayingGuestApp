@@ -1,3 +1,4 @@
+require 'prawn'
 # app/controllers/payments_controller.rb
 class PaymentsController < ApplicationController
   def new
